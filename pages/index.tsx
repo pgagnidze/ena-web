@@ -68,7 +68,6 @@ export default function Home() {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.key)
     if (e.key === "Enter") {
       handleAnswer();
     }
