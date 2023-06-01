@@ -24,10 +24,8 @@ export const OpenAIStream = async (
     body: JSON.stringify({
       model: OpenAIModel.DAVINCI_TURBO,
       messages: newConvoArr,
-      max_tokens: 1024,
-      temperature: 0.1,
-      presence_penalty: 0.0,
-      frequency_penalty: 0.3,
+      max_tokens: 512,
+      temperature: 0,
       stream: true,
     }),
   });

@@ -166,8 +166,6 @@ export default function Home() {
 
     setConversationArr(newConvoArr);
 
-    console.log(newConvoArr);
-
     const answerResponse = await fetch("/api/answer", {
       method: "POST",
       headers: {
