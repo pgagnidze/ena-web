@@ -9,6 +9,7 @@ import { Logo } from "@/components/Logo";
 export default function Home() {
   const inputRef = useRef(null);
 
+  const [conversationArr, setConversationArr] = useState([]);
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,14 +32,148 @@ export default function Home() {
 
     setLoading(true);
 
-    const prompt = `This is prompt: "${query}"`;
+    let newConvoArr = [...conversationArr];
+
+    if (newConvoArr.length === 0) {
+      newConvoArr.push({
+        role: "system",
+        content:
+          "You are a helpful assistant that accurately answers queries for Ena programming language. Show the code examples. Be accurate, helpful, concise, and clear.",
+      });
+
+      newConvoArr.push({
+        role: "user",
+        content: `
+        Ena language is the first Georgian programming language and aims to make programming more accessible for Georgians by allowing them to write code in their native language. Ena uses the syntax of popular, widely-used languages, modified to use the Georgian alphabet and keywords.
+        I allowed the use of English keywords and syntax to simplify the process of using Georgian or English interchangeably.
+  
+        This is how the factorial function looks in Ena Georgian programming language:
+  
+        ფუნქცია ფაქტორიალი(ნ = 6) {
+          თუ ნ != 0 {
+              დააბრუნე ნ * ფაქტორიალი(ნ - 1)
+          } თუარა {
+              დააბრუნე 1
+          }
+        }
+        ფუნქცია მთავარი() {
+            დააბრუნე ფაქტორიალი()
+        }
+  
+        Here is the Georgian long form example of factorial function:
+  
+        ფუნქცია სახელად ფაქტორიალი(ციფრი = 6) {
+          თუ პირობა სრულდება ციფრი != 0 {
+              დააბრუნე მნიშვნელობა ციფრი * ფაქტორიალი(ციფრი - 1)
+          } სხვა შემთხვევაში {
+              დააბრუნე მნიშვნელობა 1
+          }
+        }
+        
+        ფუნქცია სახელად მთავარი() {
+            დააბრუნე მნიშვნელობა ფაქტორიალი()
+        }
+        `,
+      });
+  
+      newConvoArr.push({
+        role: "assistant",
+        content: "I understand",
+      });
+  
+      newConvoArr.push({
+        role: "user",
+        content: `
+        This is the first Euler challenge solved in Ena programming language:
+  
+        ფუნქცია მთავარი() {
+          სულ = 0;
+          ნ = 1000;
+          ი = 0;
+          სანამ ი < ნ {
+              თუ ი % 3 == 0 || ი % 5 == 0 {
+                  სულ = სულ + ი
+              };
+              ი = ი + 1;
+          };
+          დააბრუნე სულ
+        }
+  
+        This is the second Euler challenge solved in Ena programming language:
+  
+        ფუნქცია მთავარი() {
+          სულ = 0;
+          ნ = 4000000;
+          ა = 1;
+          ბ = 2;
+          სანამ ბ <= ნ {
+              თუ ბ % 2 == 0 {
+                  სულ = სულ + ბ
+              };
+              შემდეგი = ა + ბ;
+              ა = ბ;
+              ბ = შემდეგი;
+          };
+          დააბრუნე სულ
+        }
+  
+        This is the third Euler challenge solved in Ena programming language:
+  
+        ფუნქცია ყველაზე_დიდი_მარტივი_გამყოფი(ნ) {
+          მარტივი_რიცხვი = 2;
+          ყველაზე_დიდი_გამყოფი = 1;
+      
+          სანამ ნ % 2 == 0 {
+              ნ = ნ / 2;
+              ყველაზე_დიდი_გამყოფი = 2;
+          };
+      
+          მარტივი_რიცხვი = 3;
+          სანამ მარტივი_რიცხვი * მარტივი_რიცხვი <= ნ {
+              თუ ნ % მარტივი_რიცხვი == 0 {
+                  ნ = ნ / მარტივი_რიცხვი;
+                  ყველაზე_დიდი_გამყოფი = მარტივი_რიცხვი;
+              } თუარა {
+                  მარტივი_რიცხვი = მარტივი_რიცხვი + 2;
+              }
+          };
+      
+          თუ ნ > 2 {
+              ყველაზე_დიდი_გამყოფი = ნ
+          };
+      
+          დააბრუნე ყველაზე_დიდი_გამყოფი
+        }
+        
+        ფუნქცია მთავარი() {
+            დააბრუნე ყველაზე_დიდი_მარტივი_გამყოფი(600851475143)
+        }
+        
+        I will ask you a few questions about Ena programming language for example project euler challenges, syntax checks, and more.
+        `,
+      });
+  
+      newConvoArr.push({
+        role: "assistant",
+        content: "I understand",
+      });
+    }
+
+    newConvoArr.push({
+      role: "user",
+      content: query,
+    });
+
+    setConversationArr(newConvoArr);
+
+    console.log(newConvoArr);
 
     const answerResponse = await fetch("/api/answer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt, apiKey }),
+      body: JSON.stringify({ newConvoArr, apiKey }),
     });
 
     if (!answerResponse.ok) {
@@ -57,13 +192,24 @@ export default function Home() {
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
+    let completeAnswer = ""; // variable to hold complete answer
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      setAnswer((prev) => prev + chunkValue);
+      completeAnswer += chunkValue; // concatenate chunkValue to completeAnswer
     }
+
+    setAnswer(completeAnswer); // update state using completeAnswer
+    const newConversationArr = [
+      ...newConvoArr,
+      {
+        role: "assistant",
+        content: completeAnswer, // use completeAnswer
+      },
+    ];
+    setConversationArr(newConversationArr);
 
     inputRef.current?.focus();
   };
