@@ -1,8 +1,10 @@
 import { Answer } from "@/components/Answer/Answer";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import Head from "next/head";
-import { KeyboardEvent, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
+import { Logo } from "@/components/Logo";
 
 export default function Home() {
   const inputRef = useRef(null);
@@ -111,10 +113,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container className="mt-16 sm:mt-32">
+      <Container className="mt-8 sm:mt-32">
         <div className="flex flex-col h-screen">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
+              <Logo className="h-24 w-auto" />
               <button
                 className="mt-4 flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
                 onClick={() => setShowSettings(!showSettings)}

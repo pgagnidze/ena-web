@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Popover, Transition } from "@headlessui/react";
@@ -188,12 +187,6 @@ export function Header() {
               className="top-0 order-last -mb-3 pt-3"
               style={{ position: "var(--header-position)" }}
             >
-              <div
-                className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                style={{ position: "var(--header-inner-position)" }}
-              >
-                <div className="relative"></div>
-              </div>
             </Container>
           </>
         )}
