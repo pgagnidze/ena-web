@@ -3,11 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from "./answer.module.css";
 
-interface AnswerProps {
-  text: string;
-}
-
-export const Answer: React.FC<AnswerProps> = ({ text }) => {
+export const Answer = ({ text }) => {
   return (
     <div className={styles.fadeIn}>
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
