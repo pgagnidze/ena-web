@@ -183,7 +183,9 @@ EnaBot {
         <div className="flex flex-col h-screen">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
-              <Logo className="h-24 w-full" />
+            <div className="h-24 w-full flex justify-center items-center">
+                <Logo className="h-full" />
+              </div>
               <button
                 className="mt-4 flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
                 onClick={() => setShowSettings(!showSettings)}
