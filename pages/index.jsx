@@ -51,44 +51,44 @@ export default function Home() {
 
         ###
         Identifiers
-        identifiers are allowed to contain the letters ა-ჰ, the digits 0-9, and underscores. Identifiers must start with a letter or an underscore. Identifiers are case-sensitive.
-        For Example: ცვლადი, ცვლადი_2, ცვლადი2, _ცვლადი, _ცვლადი2
+        identifiers are used to name variables, functions, and other user-defined items. An identifier starts with a letter or an underscore, followed by letters, underscores, and digits. Except reserved keywords (e.g., ფუნქცია, თუ, დააბრუნე, etc.).
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          ა = 1
+          ა_2 = 2
+          ა2 = 2
+          _ა3 = 3
+          მაჩვენე ა
+        }
+        \`\`\`
 
         ###
         Booleans
-        the boolean type has two values: ჭეშმარიტი and მცდარი. Booleans are used to represent true or false values.
-        For example: ჭეშმარიტი, მცდარი.
+        booleans are either ჭეშმარიტი or მცდარი.
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          მაჩვენე ჭეშმარიტი
+          მაჩვენე მცდარი
+        }
+        \`\`\`
 
         ###
         Numerals
-        numerals are allowed to contain the digits 0-9. To indicate bases other than 10, we can use 0val, where val is the base number starting from 0 to 9, and a to z.
-        For example:
-        123 -- This is the decimal representation of the number 123
-        00 1 - This is the binary representation of the number 1
-        01 10 -- This is the base 2 representation of the number 2
-        02 11 -- This is the base 3 representation of the number 4
-        ...
-        0e 13 -- This is the base 15 representation of the number 2
-        0f 14 -- This is the base 16 representation of the number 2
-        ...
-
-        07 21 -- This is the octal representation of the number 7
-        0f 210 -- This is the hexadecimal representation of the number 15
-        01 10 -- This is the binary representation of the number 2
-
-        10 b2 -- This is the binary representation of the number 2
-        170 b8 -- This is the octal representation of the number 120
-        FF00 b16 -- This is the hexadecimal representation of the number 65280
-
-        numeral exponent notation is used to represent numbers in scientific notation. It consists of a base, followed by a lowercase or uppercase e, followed by an exponent.
-        For example:
-        1e2 -- This is the same as 1 * 10^2
-        1e-2 -- This is the same as 1 * 10^-2
-        1E2 -- This is the same as 1 * 10^2
+        numerals support bases (e.g., decimal, binary, octal, or hexadecimal) and exponential notation.
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          მაჩვენე 01 1010 # binary
+          მაჩვენე 07 12 # octal
+          მაჩვენე 0f A # hexadecimal
+          მაჩვენე 1e3 # exponential notation
+        }
 
         ###
         Strings
-        strings are enclosed in double quotes. special characters are escaped automatically.
+        strings are enclosed in either double quotes or single quotes. special characters are escaped automatically. Strings can be concatenated using the + operator.
         Example:
         \`\`\`
         ფუნქცია მთავარი() {
@@ -96,8 +96,6 @@ export default function Home() {
           მაჩვენე ა
         }
         \`\`\`
-
-        
 
         ###
         Function declaration
@@ -127,7 +125,6 @@ export default function Home() {
         }
         \`\`\`
         
-
         ###
         Variables
         variables are assigned using variable name, an equals sign, and the new value.
@@ -139,31 +136,18 @@ export default function Home() {
         \`\`\`        
 
         ###
-        Operators
-        Ena supports the following operators:
-        - Arithmetic operators: +, -, *, /, %, ^
-        - Comparison operators: <, <=, >, >=, ==, !=
-        - Logical operators: &&, ||, და, ან, !
-        && and და are used for logical and.
-        || and ან are used for logical or.
-        ! is used for logical not.
-
-        Operator precedence is as follows from lowest to highest:
-        &&, ||, და, ან (logical operators)
-        <, <=, >, >=, ==, != (comparison operators)
-        ! (logical not)
-        +, - (addition and subtraction)
-        *, /, % (multiplication, division, and modulo)
-        - (unary minus)
-        ^ (exponentiation)
-
-        ###
         Return
         the return keyword is used to return a value from a function. It can also have an expression.
         Example:
         \`\`\`
         ფუნქცია მთავარი() {
           დააბრუნე ჭეშმარიტი
+        }
+        \`\`\`
+        or
+        \`\`\`
+        ფუნქცია მთავარი() {
+          დააბრუნე 1 + 1
         }
         \`\`\`
 
@@ -175,6 +159,18 @@ export default function Home() {
         ფუნქცია მთავარი() {
           მასივი = ახალი[5] 0
           მასივი[0] = 1
+          დააბრუნე მასივი
+        }
+        \`\`\`
+        We can create multidimensional arrays by nesting arrays.
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          მასივი = ახალი[2][2] 0
+          მასივი[0][0] = 1
+          მასივი[0][1] = 2
+          მასივი[1][0] = 3
+          მასივი[1][1] = 4
           დააბრუნე მასივი
         }
         \`\`\`
@@ -198,7 +194,7 @@ export default function Home() {
 
         ###
         While statements
-        სანამ is used for looping.
+        სანამ is used for while looping.
         Example:
         \`\`\`
         ფუნქცია მთავარი() {
@@ -211,31 +207,127 @@ export default function Home() {
         \`\`\`
 
         ###
+        Shell Commands
+        ბრძანება or $ is used for executing shell commands.
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          ბრძანება "echo გამარჯობა, მსოფლიო!"
+        }
+        \`\`\`
+        or
+        \`\`\`
+        ფუნქცია მთავარი() {
+          $ "echo გამარჯობა, მსოფლიო!"
+        }
+        \`\`\`
+
+        ###
         Print
-        მაჩვენე or @ is used for printing. For example: მაჩვენე "გამარჯობა, მსოფლიო!" or @ "გამარჯობა, მსოფლიო!"
+        მაჩვენე or @ is used for printing.
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          მაჩვენე "გამარჯობა, მსოფლიო!"
+        }
+        \`\`\`
+        or
+        \`\`\`
+        ფუნქცია მთავარი() {
+          @ "გამარჯობა, მსოფლიო!"
+        }
+        \`\`\`
 
         ###
         Comments
-        single-line comments start with # and continue until the end of the line. Multi-line comments start with #{ and end with #}. For example: # This is a comment.
+        single-line comments start with # and continue until the end of the line. Multi-line comments start with #{ and end with #}.
+        Example:
+        \`\`\`
+        ფუნქცია მთავარი() {
+          მაჩვენე "გამარჯობა, მსოფლიო!" # This is a comment.
+          #{
+            This is a multi-line comment.
+            This is a comment.
+          #}
+        }
+        \`\`\`
         ---
 
         ---
         Language rules:
 
         ###
-        Falsy values
+        Identifier rules
+        identifiers are allowed to contain the letters ა-ჰ, the digits 0-9, and underscores. Identifiers must start with a letter or an underscore. Identifiers are case-sensitive.
+        For Example: ცვლადი, ცვლადი_2, ცვლადი2, _ცვლადი, _ცვლადი2
+
+        ###
+        Boolean rules
+        the boolean type has two values: ჭეშმარიტი and მცდარი. Booleans are used to represent true or false values.
+        For example: ჭეშმარიტი, მცდარი.
+
+        ###
+        Numeral base rules
+        numerals are allowed to contain the digits 0-9. To indicate bases other than 10, we can use 0val, where val is the base number starting from 0 to 9, and a to z.
+        For example:
+        123 -- This is the decimal representation of the number 123
+        00 1 - This is the binary representation of the number 1
+        01 10 -- This is the base 2 representation of the number 2
+        02 11 -- This is the base 3 representation of the number 4
+        ...
+        0e 13 -- This is the base 15 representation of the number 18
+        0f 14 -- This is the base 16 representation of the number 20
+        ...
+
+        07 21 -- This is the octal representation of the number 7
+        0f 210 -- This is the hexadecimal representation of the number 15
+        01 10 -- This is the binary representation of the number 2
+
+        10 b2 -- This is the binary representation of the number 2
+        170 b8 -- This is the octal representation of the number 120
+        FF00 b16 -- This is the hexadecimal representation of the number 65280
+
+        ###
+        Numeral exponent notation rules
+        numeral exponent notation is used to represent numbers in scientific notation. It consists of a base, followed by a lowercase or uppercase e, followed by an exponent.
+        For example:
+        1e2 -- This is the same as 1 * 10^2
+        1e-2 -- This is the same as 1 * 10^-2
+        1E2 -- This is the same as 1 * 10^2
+
+        ###
+        Operators rules
+        Ena supports the following operators:
+        - Arithmetic operators: +, -, *, /, %, ^
+        - Comparison operators: <, <=, >, >=, ==, !=
+        - Logical operators: &&, ||, და, ან, !
+        && and და are used for logical and.
+        || and ან are used for logical or.
+        ! is used for logical not.
+
+        Operator precedence is as follows from lowest to highest:
+        &&, ||, და, ან (logical operators)
+        <, <=, >, >=, ==, != (comparison operators)
+        ! (logical not)
+        +, - (addition and subtraction)
+        *, /, % (multiplication, division, and modulo)
+        - (unary minus)
+        ^ (exponentiation)
+
+        ###
+        Falsy values rules
         Falsy values are მცდარი, 0, and nil. All other values are truthy.
 
         ###
-        Assignemnts
+        Assignemnts rules
         Addition assignemnts, subtraction assignemnts, multiplication assignemnts, division assignemnts, and modulus assignemnts are not allowed. Use the following instead: ა = ა + 1, ა = ა - 1, ა = ა * 1, ა = ა / 1, ა = ა % 1.
 
         ###
-        Increment and decrement
+        Increment and decrement rules
         Increment and decrement operators are not allowed. Use the following instead: ა = ა + 1, ა = ა - 1.
 
         ###
-        Structured programming
+        Structured programming rules
         Structured programming is enforced. This means that all code must be written inside functions. It has entrypoint function მთავარი which is called when the program starts. Entrypoint function doesn't take any parameters.
         Example:
         \`\`\`
