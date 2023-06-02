@@ -14,6 +14,7 @@ export default function Home() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [collapsed, setCollapsed] = useState(false);
 
   const [showSettings, setShowSettings] = useState(false);
   const [apiKey, setApiKey] = useState("");
@@ -129,6 +130,10 @@ EnaBot {
     throw apiError;
   }
 
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleAnswer();
@@ -178,13 +183,14 @@ EnaBot {
         <div className="flex flex-col h-screen">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
-              <Logo className="h-24 w-auto" />
+              <Logo className="h-24 w-full" />
               <button
                 className="mt-4 flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
                 onClick={() => setShowSettings(!showSettings)}
               >
                 {showSettings ? "დამალე" : "მაჩვენე"} პარამეტრები
               </button>
+              <div className="mt-6 text-center text-lg">{`AI-ით აღჭურვილი დამხმარე ენა პროგრამირების ენისთვის.`}</div>
 
               {showSettings && (
                 <div className="w-[340px] sm:w-[400px]">
@@ -269,7 +275,39 @@ EnaBot {
                   <Answer text={answer} />
                 </div>
               ) : (
-                <div className="mt-6 text-center text-lg">{`AI-ით აღჭურვილი დამხმარე ენა პროგრამირების ენისთვის.`}</div>
+                <><button
+                className="text-gray-500 mt-4"
+                onClick={toggleCollapse}
+              >
+                {collapsed ? "მაჩვენე მაგალითი" : "დამალე მაგალითი"}
+              </button>
+              {!collapsed && (
+        <p className="text-gray-600 mb-2">
+          <br />
+          <code>
+            /code ფუნქცია ფაქტორიალი(ნ = 6) &#123;
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;თუ ნ != 0 &#123;
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ნ * ფაქტორიალი(ნ - 1)
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125; თუარა &#123;
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე 1
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;
+            <br />
+            &#125;
+            <br />
+            <br />
+            ფუნქცია მთავარი() &#123;
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ფაქტორიალი()
+            <br />
+            &#125;
+          </code>
+        </p>
+      )}</>
               )}
             </div>
           </div>
