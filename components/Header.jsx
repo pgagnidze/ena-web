@@ -85,9 +85,9 @@ function MobileNavigation(props) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
-                <MobileNavItem href="/">Home</MobileNavItem>
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/documentation">Documentation</MobileNavItem>
+                <MobileNavItem href="/">მთავარი</MobileNavItem>
+                <MobileNavItem href="/about">ინფორმაცია</MobileNavItem>
+                <MobileNavItem href="https://github.com/pgagnidze/ena/wiki/Enadoc">დოკუმენტაცია</MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -122,9 +122,9 @@ function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
-        <NavItem href="/">Home</NavItem>
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/documentation">Documentation</NavItem>
+        <NavItem href="/">მთავარი</NavItem>
+        <NavItem href="/about">ინფორმაცია</NavItem>
+        <NavItem href="https://github.com/pgagnidze/ena/wiki/Enadoc">დოკუმენტაცია</NavItem>
       </ul>
     </nav>
   );

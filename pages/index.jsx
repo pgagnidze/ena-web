@@ -178,7 +178,7 @@ EnaBot {
                 className="mt-4 flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
                 onClick={() => setShowSettings(!showSettings)}
               >
-                {showSettings ? "Hide" : "Show"} Settings
+                {showSettings ? "დამალე" : "მაჩვენე"} პარამეტრები
               </button>
 
               {showSettings && (
@@ -230,7 +230,7 @@ EnaBot {
                     style={{ resize: "none" }}
                     className="h-auto w-full rounded-md border border-zinc-600 pr-12 pl-6 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 sm:h-auto sm:py-2 sm:pr-16 sm:pl-8 sm:text-lg"
                     value={query}
-                    placeholder="Type /code [code] to begin."
+                    placeholder="დასაწყებად აკრიფეთ /code [code]."
                     onChange={(e) => setQuery(e.target.value)}
                   />
                   <button>
@@ -270,7 +270,7 @@ EnaBot {
                   <Answer text={answer} />
                 </div>
               ) : (
-                <div className="mt-6 text-center text-lg">{`AI-powered helper for Ena programming language.`}</div>
+                <div className="mt-6 text-center text-lg">{`AI-ით აღჭურვილი დამხმარე ენა პროგრამირების ენისთვის.`}</div>
               )}
             </div>
           </div>

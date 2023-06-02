@@ -42,15 +42,16 @@ export function Footer() {
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
-            Created by
+            შექმნილია
             <a
               className="hover:opacity-50 mx-1"
               href="https://papu.omg.lol"
               target="_blank"
               rel="noreferrer"
             >
-              Papuna Gagnidze
+              პაპუნა გაგნიძის
             </a>
+            მიერ
           </p>
         </div>
       </div>
