@@ -14,7 +14,7 @@ export default function Home() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const [showSettings, setShowSettings] = useState(false);
   const [apiKey, setApiKey] = useState("");
