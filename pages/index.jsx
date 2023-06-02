@@ -61,12 +61,30 @@ export default function Home() {
 
         ###
         Numerals
-        numerals are allowed to contain the digits 0-9. Numerals can start with a letters to indicate their base.
+        numerals are allowed to contain the digits 0-9. To indicate bases other than 10, we can use 0val, where val is the base number starting from 0 to 9, and a to z.
         For example:
         123 -- This is the decimal representation of the number 123
+        00 1 - This is the binary representation of the number 1
+        01 10 -- This is the base 2 representation of the number 2
+        02 11 -- This is the base 3 representation of the number 4
+        ...
+        0e 13 -- This is the base 15 representation of the number 2
+        0f 14 -- This is the base 16 representation of the number 2
+        ...
+
+        07 21 -- This is the octal representation of the number 7
+        0f 210 -- This is the hexadecimal representation of the number 15
+        01 10 -- This is the binary representation of the number 2
+
         10 b2 -- This is the binary representation of the number 2
         170 b8 -- This is the octal representation of the number 120
         FF00 b16 -- This is the hexadecimal representation of the number 65280
+
+        numeral exponent notation is used to represent numbers in scientific notation. It consists of a base, followed by a lowercase or uppercase e, followed by an exponent.
+        For example:
+        1e2 -- This is the same as 1 * 10^2
+        1e-2 -- This is the same as 1 * 10^-2
+        1E2 -- This is the same as 1 * 10^2
 
         ###
         Strings
