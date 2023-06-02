@@ -181,15 +181,6 @@ export function Header() {
           marginBottom: "var(--header-mb)",
         }}
       >
-        {isHomePage && (
-          <>
-            <Container
-              className="top-0 order-last -mb-3 pt-3"
-              style={{ position: "var(--header-position)" }}
-            >
-            </Container>
-          </>
-        )}
         <div
           ref={headerRef}
           className="top-0 z-10 h-16 pt-6"
@@ -210,7 +201,6 @@ export function Header() {
           </Container>
         </div>
       </header>
-      {isHomePage && <div style={{ height: "var(--content-offset)" }} />}
     </>
   );
 }

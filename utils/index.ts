@@ -31,7 +31,7 @@ export const OpenAIStream = async (
   });
 
   if (res.status !== 200) {
-    throw new Error("OpenAI API returned an error");
+    throw new Error("openai returned an error: " +  await res.text());
   }
 
   const stream = new ReadableStream({

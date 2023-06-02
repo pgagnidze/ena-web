@@ -13,6 +13,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(null);
 
   const [showSettings, setShowSettings] = useState(false);
   const [apiKey, setApiKey] = useState("");
@@ -37,8 +38,7 @@ export default function Home() {
     if (newConvoArr.length === 0) {
       newConvoArr.push({
         role: "system",
-        content: 
-`
+        content: `
 Roleplay as a world-class expert on the programming languages and related concepts, and as a world-class teacher, following the instructions below.
 Response format: logged output only, sans explanation, in natural language.
 
@@ -86,7 +86,9 @@ EnaBot {
 
     if (!answerResponse.ok) {
       setLoading(false);
-      throw new Error(answerResponse.statusText);
+      const error = new Error(await answerResponse.text());
+      setApiError(error);
+      return;
     }
 
     const data = answerResponse.body;
@@ -122,6 +124,10 @@ EnaBot {
 
     inputRef.current?.focus();
   };
+
+  if (apiError) {
+    throw apiError;
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
