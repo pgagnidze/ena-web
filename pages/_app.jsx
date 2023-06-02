@@ -29,7 +29,7 @@ function handleError(error) {
       errorMessage = "You exceeded your current quota, please check your plan and billing details.";
     }
     if (errorMessage.includes("maximum context length")) {
-      errorMessage = "You have reached to your maximum token limit, please refresh the browser and start a new conversation.";
+      errorMessage = "You have reached to your maximum token limit, please start a new conversation.";
     }
     alert(`From OpenAI: ${errorMessage}`);
   }
