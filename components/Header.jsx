@@ -35,10 +35,10 @@ function ChevronDownIcon(props) {
   );
 }
 
-function MobileNavItem({ href, children }) {
+function MobileNavItem({ href, target, children }) {
   return (
     <li>
-      <Popover.Button as={Link} href={href} className="block py-2">
+      <Popover.Button as={Link} href={href} target={target} className="block py-2">
         {children}
       </Popover.Button>
     </li>
@@ -87,7 +87,7 @@ function MobileNavigation(props) {
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
                 <MobileNavItem href="/">მთავარი</MobileNavItem>
                 <MobileNavItem href="/about">ინფორმაცია</MobileNavItem>
-                <MobileNavItem href="https://github.com/pgagnidze/ena/wiki/Enadoc">დოკუმენტაცია</MobileNavItem>
+                <MobileNavItem href="https://github.com/pgagnidze/ena/wiki/Documentation" target={"_blank"}>დოკუმენტაცია</MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -97,13 +97,14 @@ function MobileNavigation(props) {
   );
 }
 
-function NavItem({ href, children }) {
+function NavItem({ href, target, children }) {
   let isActive = useRouter().pathname === href;
 
   return (
     <li>
       <Link
         href={href}
+        target={target}
         className={clsx(
           "relative block px-3 py-2 transition",
           isActive ? "text-gray-500/70" : "hover:text-gray-500/70"
@@ -124,7 +125,7 @@ function DesktopNavigation(props) {
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
         <NavItem href="/">მთავარი</NavItem>
         <NavItem href="/about">ინფორმაცია</NavItem>
-        <NavItem href="https://github.com/pgagnidze/ena/wiki/Enadoc">დოკუმენტაცია</NavItem>
+        <NavItem href="https://github.com/pgagnidze/ena/wiki/Documentation" target="_blank">დოკუმენტაცია</NavItem>
       </ul>
     </nav>
   );

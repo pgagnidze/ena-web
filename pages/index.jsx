@@ -205,12 +205,6 @@ EnaBot {
                       }}
                     />
                   </div>
-                  <p
-                    className="mt-2 text-sm text-gray-500"
-                    id="email-description"
-                  >
-                    We are not storing this on the server.
-                  </p>
                   <div className="mt-4 flex space-x-2 justify-center">
                     <div
                       className="flex cursor-pointer items-center space-x-2 px-3 py-1 text-sm text-gray-900"
