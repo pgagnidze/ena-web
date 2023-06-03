@@ -241,13 +241,13 @@ EnaBot {
                       className="flex cursor-pointer items-center space-x-2 px-3 py-1 text-sm text-gray-900"
                       onClick={handleClear}
                     >
-                      Clear
+                      გაასუფთავე
                     </div>
                     <div
                       className="flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
                       onClick={handleSave}
                     >
-                      Save
+                      შეინახე
                     </div>
                   </div>
                 </div>
