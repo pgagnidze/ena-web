@@ -70,7 +70,7 @@ EnaBot {
       });
     }
 
-    if (!query.startsWith("/")) {
+    if (!query.trim().startsWith("/")) {
       const translatedEn = await fetch("/api/translate", {
         method: "POST",
         headers: {
