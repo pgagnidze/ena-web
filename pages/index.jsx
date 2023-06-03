@@ -10,7 +10,7 @@ export default function Home() {
   const inputRef = useRef(null);
 
   const [conversationArr, setConversationArr] = useState([]);
-  const [query, setQuery] = useState("");
+  let [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
@@ -70,6 +70,16 @@ EnaBot {
       });
     }
 
+    const translatedEn = await fetch("/api/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, lang: "en" }),
+    });
+
+    query = await translatedEn.text();
+
     newConvoArr.push({
       role: "user",
       content: query,
@@ -98,27 +108,38 @@ EnaBot {
       return;
     }
 
-    setLoading(false);
-
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
-    let completeAnswer = ""; // variable to hold complete answer
+    let completeAnswer = "";
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      completeAnswer += chunkValue; // concatenate chunkValue to completeAnswer
-      setAnswer((prev) => prev + chunkValue); // update state using chunkValue
+      completeAnswer += chunkValue;
+      // update state using chunkValue, disabled for now because the translation is working better when we pass the complete answer
+      // setAnswer((prev) => prev + chunkValue); 
     }
 
-    setAnswer(completeAnswer); // update state using completeAnswer
+    const translatedGe = await fetch("/api/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query: completeAnswer, lang: "ka" }),
+    });
+
+    const translatedAnswer = await translatedGe.text();
+
+    setLoading(false);
+
+    setAnswer(translatedAnswer);
     const newConversationArr = [
       ...newConvoArr,
       {
         role: "assistant",
-        content: completeAnswer, // use completeAnswer
+        content: completeAnswer,
       },
     ];
     setConversationArr(newConversationArr);
@@ -273,7 +294,7 @@ EnaBot {
                 </div>
               ) : answer ? (
                 <div className="mt-6">
-                  <div className="font-bold text-2xl mb-2">Answer</div>
+                  <div className="font-bold text-2xl mb-2">პასუხი</div>
                   <Answer text={answer} />
                 </div>
               ) : (
