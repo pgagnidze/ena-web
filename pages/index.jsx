@@ -224,7 +224,7 @@ EnaBot {
                       type="password"
                       id="api-key"
                       name="api-key"
-                      placeholder="Enter your API key"
+                      placeholder="შეიყვანეთ თქვენი API Key"
                       className="max-w-[400px] block w-full rounded-md border border-gray-300 p-2 text-black shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
                       value={apiKey}
                       onChange={(e) => {
@@ -272,14 +272,14 @@ EnaBot {
                 </div>
               ) : (
                 <div className="text-center font-bold text-3xl mt-7">
-                  Please enter your
+                  გთხოვთ შეიყვანოთ თქვენი
                   <a
                     className="mx-2 underline hover:opacity-50"
                     href="https://platform.openai.com/account/api-keys"
                   >
-                    OpenAI API key
+                    OpenAI API Key
                   </a>
-                  in settings.
+                  პარამეტრებში.
                 </div>
               )}
 
