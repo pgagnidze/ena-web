@@ -70,15 +70,17 @@ EnaBot {
       });
     }
 
-    const translatedEn = await fetch("/api/translate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query, lang: "en" }),
-    });
+    if (!query.startsWith("/")) {
+      const translatedEn = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query, lang: "en" }),
+      });
 
-    query = await translatedEn.text();
+      query = await translatedEn.text();
+    }
 
     newConvoArr.push({
       role: "user",
@@ -119,7 +121,7 @@ EnaBot {
       const chunkValue = decoder.decode(value);
       completeAnswer += chunkValue;
       // update state using chunkValue, disabled for now because the translation is working better when we pass the complete answer
-      // setAnswer((prev) => prev + chunkValue); 
+      // setAnswer((prev) => prev + chunkValue);
     }
 
     const translatedGe = await fetch("/api/translate", {
@@ -204,7 +206,7 @@ EnaBot {
         <div className="flex flex-col h-screen">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
-            <div className="h-24 w-full flex justify-center items-center">
+              <div className="h-24 w-full flex justify-center items-center">
                 <Logo className="h-full" />
               </div>
               <button
@@ -298,39 +300,43 @@ EnaBot {
                   <Answer text={answer} />
                 </div>
               ) : (
-                <><button
-                className="text-gray-500 mt-4"
-                onClick={toggleCollapse}
-              >
-                {collapsed ? "მაჩვენე მაგალითი" : "დამალე მაგალითი"}
-              </button>
-              {!collapsed && (
-        <p className="text-gray-600 mb-2">
-          <br />
-          <code>
-            /code ფუნქცია ფაქტორიალი(ნ = 6) &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;თუ ნ != 0 &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ნ * ფაქტორიალი(ნ - 1)
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&#125; თუარა &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე 1
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&#125;
-            <br />
-            &#125;
-            <br />
-            <br />
-            ფუნქცია მთავარი() &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ფაქტორიალი()
-            <br />
-            &#125;
-          </code>
-        </p>
-      )}</>
+                <>
+                  <button
+                    className="text-gray-500 mt-4"
+                    onClick={toggleCollapse}
+                  >
+                    {collapsed ? "მაჩვენე მაგალითი" : "დამალე მაგალითი"}
+                  </button>
+                  {!collapsed && (
+                    <p className="text-gray-600 mb-2">
+                      <br />
+                      <code>
+                        /code ფუნქცია ფაქტორიალი(ნ = 6) &#123;
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;თუ ნ != 0 &#123;
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე
+                        ნ * ფაქტორიალი(ნ - 1)
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&#125; თუარა &#123;
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე
+                        1
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&#125;
+                        <br />
+                        &#125;
+                        <br />
+                        <br />
+                        ფუნქცია მთავარი() &#123;
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ფაქტორიალი()
+                        <br />
+                        &#125;
+                      </code>
+                    </p>
+                  )}
+                </>
               )}
             </div>
           </div>
