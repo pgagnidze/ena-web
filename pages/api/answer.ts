@@ -4,14 +4,14 @@ import {
   ParsedEvent,
   ReconnectInterval,
 } from "eventsource-parser";
-import { cors } from "@/utils";
+import { allowEdgeCors } from "@/utils";
 import { NextRequest } from "next/server";
 
 export const config = {
   runtime: "edge",
 };
 
-const handler = async (req: NextRequest): Promise<Response> => {
+const handler = async (req: NextRequest, headers: Headers): Promise<Response> => {
   try {
     const { newConvoArr, apiKey } = (await req.json()) as {
       newConvoArr: {
@@ -72,16 +72,13 @@ const handler = async (req: NextRequest): Promise<Response> => {
         }
       },
     });
-    const successResponse = new Response(stream);
-    await cors(req, successResponse);
-    return successResponse;
+    return new Response(stream, { headers })
   } catch (error) {
-    const errorResponse = new Response("answer handler returned an error: " + error, {
+    return new Response("answer handler returned an error: " + error, {
       status: 500,
+      headers,
     });
-    await cors(req, errorResponse);
-    return errorResponse;
   }
 };
 
-export default handler;
+export default allowEdgeCors(handler);

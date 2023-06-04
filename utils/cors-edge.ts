@@ -1,3 +1,4 @@
+import { NextRequest, NextResponse } from "next/server";
 import { whitelist } from "./cors-whitelist";
 
 type StaticOrigin = boolean | string | RegExp | Array<boolean | string | RegExp>;
@@ -24,6 +25,33 @@ const defaultOptions: CorsOptions = {
   preflightContinue: false,
   optionsSuccessStatus: 204
 };
+
+import { NextApiRequest, NextApiResponse } from "next";
+
+export const allowEdgeCors =
+  (fn: Function) => async (req: NextRequest) => {
+    const reqOrigin = req.headers.get("Origin") ?? undefined;
+    const response = NextResponse.next();
+    const { headers } = response;
+    if (reqOrigin && whitelist.includes(reqOrigin)) {
+      headers.set("Access-Control-Allow-Origin", reqOrigin);
+    }
+    headers.set("Access-Control-Allow-Credentials", "true");
+    headers.set(
+      "Access-Control-Allow-Methods",
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+    );
+    headers.set(
+      "Access-Control-Allow-Headers",
+
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+    );
+    if (req.method === "OPTIONS") {
+      return new Response(null);
+    }
+    return await fn(req, headers);
+  };
+
 
 function isOriginAllowed (origin: string, allowed: StaticOrigin): boolean {
   return Array.isArray(allowed)
