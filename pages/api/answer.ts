@@ -72,14 +72,15 @@ const handler = async (req: NextRequest): Promise<Response> => {
         }
       },
     });
-    return cors(req, new Response(stream));
+    const successResponse = new Response(stream);
+    await cors(req, successResponse);
+    return successResponse;
   } catch (error) {
-    return cors(
-      req,
-      new Response("answer handler returned an error: " + error, {
-        status: 500,
-      })
-    );
+    const errorResponse = new Response("answer handler returned an error: " + error, {
+      status: 500,
+    });
+    await cors(req, errorResponse);
+    return errorResponse;
   }
 };
 
