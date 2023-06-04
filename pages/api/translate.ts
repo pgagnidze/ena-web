@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { v2 } from "@google-cloud/translate";
 const { Translate } = v2;
-import { allowCors } from "@/utils";
+import { allowNodeJSCors } from "@/utils";
 
 export const config = {
   runtime: "nodejs",
@@ -34,4 +34,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).send(translatedBlocks.join(""));
 };
 
-export default allowCors(handler);
+export default allowNodeJSCors(handler);

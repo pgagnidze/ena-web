@@ -1,13 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { whitelist } from "./cors-whitelist";
 
-const whitelist = [
-  "http://127.0.0.1:3000",
-  "http://localhost:3000",
-  "https://ena-lang.org",
-  "https://ena--lang-org.translate.goog",
-];
-
-export const allowCors =
+export const allowNodeJSCors =
   (fn: Function) => async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.headers.origin && whitelist.includes(req.headers.origin)) {
       res.setHeader("Access-Control-Allow-Origin", req.headers.origin);

@@ -1,38 +1,86 @@
 import { OpenAIModel } from "@/types";
-import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
-import { allowCors } from "@/utils";
+import {
+  createParser,
+  ParsedEvent,
+  ReconnectInterval,
+} from "eventsource-parser";
+import { cors } from "@/utils";
+import { NextRequest } from "next/server";
 
 export const config = {
-  runtime: "nodejs",
+  runtime: "edge",
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextRequest): Promise<Response> => {
   try {
-  const { newConvoArr, apiKey } = req.body as {
-    newConvoArr: {
-      role: "system" | "user" | "assistant";
-      content: string;
-    }[];
-    apiKey: string;
-  };
-  const configuration = new Configuration({ apiKey });
-  const openai = new OpenAIApi(configuration);
-  let completion;
-    completion = await openai.createChatCompletion({
-      model: OpenAIModel.DAVINCI_TURBO,
-      messages: newConvoArr,
-      max_tokens: 512,
-      temperature: 0,
+    const { newConvoArr, apiKey } = (await req.json()) as {
+      newConvoArr: {
+        role: string;
+        content: string;
+      }[];
+      apiKey: string;
+    };
+
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        model: OpenAIModel.DAVINCI_TURBO,
+        messages: newConvoArr,
+        max_tokens: 512,
+        temperature: 0,
+        stream: true,
+      }),
     });
-    res.status(200).send(completion.data.choices[0].message?.content)
-  } catch (error: any) {
-    if (error.response) {
-      res.status(500).send("openai returned an error: " + error.response.data.error.message);
-    } else {
-      res.status(500).send("openai returned an error: " + error.message);
+
+    if (res.status !== 200) {
+      throw new Error("openai returned an error: " + (await res.text()));
     }
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        const onParse = (event: ParsedEvent | ReconnectInterval) => {
+          if (event.type === "event") {
+            const data = event.data;
+
+            if (data === "[DONE]") {
+              controller.close();
+              return;
+            }
+
+            try {
+              const json = JSON.parse(data);
+              const text = json.choices[0].delta.content;
+              const queue = encoder.encode(text);
+              controller.enqueue(queue);
+            } catch (e) {
+              controller.error(e);
+            }
+          }
+        };
+
+        const parser = createParser(onParse);
+
+        for await (const chunk of res.body as any) {
+          parser.feed(decoder.decode(chunk));
+        }
+      },
+    });
+    return cors(req, new Response(stream));
+  } catch (error) {
+    return cors(
+      req,
+      new Response("answer handler returned an error: " + error, {
+        status: 500,
+      })
+    );
   }
 };
 
-export default allowCors(handler);
+export default handler;

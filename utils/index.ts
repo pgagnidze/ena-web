@@ -1,1 +1,2 @@
-export * from './cors';
+export * from './cors-nodejs';
+export * from './cors-edge'
