@@ -47,7 +47,7 @@ export const allowEdgeCors =
       "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
     );
     if (req.method === "OPTIONS") {
-      return new Response(null);
+      return new Response(null, { headers });
     }
     return await fn(req, headers);
   };

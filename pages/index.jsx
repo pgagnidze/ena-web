@@ -97,9 +97,6 @@ EnaBot {
       body: JSON.stringify({ newConvoArr, apiKey }),
     });
 
-    
-    console.log(answerResponse.headers)
-
     if (!answerResponse.ok) {
       setLoading(false);
       const error = new Error(await answerResponse.text());
