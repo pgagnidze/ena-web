@@ -20,8 +20,8 @@ interface CorsOptions {
 
 const defaultOptions: CorsOptions = {
   origin: whitelist,
-  methods: "GET,OPTIONS,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
   optionsSuccessStatus: 204
 };
 
