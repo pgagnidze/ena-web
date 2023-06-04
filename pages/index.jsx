@@ -104,25 +104,7 @@ EnaBot {
       return;
     }
 
-    const data = answerResponse.body;
-
-    if (!data) {
-      return;
-    }
-
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
-    let completeAnswer = "";
-
-    while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      completeAnswer += chunkValue;
-      // update state using chunkValue, disabled for now because the translation is working better when we pass the complete answer
-      // setAnswer((prev) => prev + chunkValue);
-    }
+    const completeAnswer = await answerResponse.text();
 
     const translatedGe = await fetch("/api/translate", {
       method: "POST",
