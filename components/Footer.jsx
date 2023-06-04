@@ -1,3 +1,5 @@
+import Link from "next/link";
+import clsx from "clsx";
 const navigation = [
   {
     name: "GitHub",
@@ -33,13 +35,25 @@ export function Footer() {
               key={item.name}
               href={item.href}
               className="text-gray-400 hover:text-gray-500"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
             </a>
           ))}
         </div>
+        <Link
+          href="https://ena--lang-org.translate.goog/?_x_tr_sl=ka&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true"
+          target="_blank"
+          className={clsx(
+            "block px-3 py-2 transition",
+            "text-gray-500 hover:text-gray-900",
+            "bg-gray-200 hover:bg-gray-300 rounded-md"
+          )}
+        >
+          EN
+        </Link>
         <div className="mt-8 md:order-1 md:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
             შექმნილია

@@ -38,7 +38,12 @@ function ChevronDownIcon(props) {
 function MobileNavItem({ href, target, children }) {
   return (
     <li>
-      <Popover.Button as={Link} href={href} target={target} className="block py-2">
+      <Popover.Button
+        as={Link}
+        href={href}
+        target={target}
+        className="block py-2"
+      >
         {children}
       </Popover.Button>
     </li>
@@ -87,7 +92,12 @@ function MobileNavigation(props) {
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
                 <MobileNavItem href="/">მთავარი</MobileNavItem>
                 <MobileNavItem href="/about">ინფორმაცია</MobileNavItem>
-                <MobileNavItem href="https://github.com/pgagnidze/ena/wiki/Documentation" target={"_blank"}>დოკუმენტაცია</MobileNavItem>
+                <MobileNavItem
+                  href="https://github.com/pgagnidze/ena/wiki/Documentation"
+                  target={"_blank"}
+                >
+                  დოკუმენტაცია
+                </MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -125,7 +135,12 @@ function DesktopNavigation(props) {
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
         <NavItem href="/">მთავარი</NavItem>
         <NavItem href="/about">ინფორმაცია</NavItem>
-        <NavItem href="https://github.com/pgagnidze/ena/wiki/Documentation" target="_blank">დოკუმენტაცია</NavItem>
+        <NavItem
+          href="https://github.com/pgagnidze/ena/wiki/Documentation"
+          target="_blank"
+        >
+          დოკუმენტაცია
+        </NavItem>
       </ul>
     </nav>
   );
@@ -197,7 +212,9 @@ export function Header() {
                 <MobileNavigation className="pointer-events-auto md:hidden" />
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
-              <div className="flex justify-end md:flex-1"></div>
+              <div className="flex justify-end md:flex-1">
+                <div className="pointer-events-auto hidden md:block"></div>
+              </div>
             </div>
           </Container>
         </div>
