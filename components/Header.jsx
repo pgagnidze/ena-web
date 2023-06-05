@@ -54,7 +54,7 @@ function MobileNavigation(props) {
   return (
     <Popover {...props}>
       <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
-        Menu
+        მენიუ
         <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700" />
       </Popover.Button>
       <Transition.Root>
@@ -86,14 +86,14 @@ function MobileNavigation(props) {
               <Popover.Button aria-label="Close menu" className="-m-1 p-1">
                 <CloseIcon className="h-6 w-6 text-zinc-500" />
               </Popover.Button>
-              <h2 className="text-sm font-medium text-zinc-600">Navigation</h2>
+              <h2 className="text-sm font-medium text-zinc-600">ნავიგაცია</h2>
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
                 <MobileNavItem href="/">მთავარი</MobileNavItem>
                 <MobileNavItem href="/about">ინფორმაცია</MobileNavItem>
                 <MobileNavItem
-                  href="https://github.com/pgagnidze/ena/wiki/Documentation"
+                  href="https://github.com/pgagnidze/ena/wiki"
                   target={"_blank"}
                 >
                   დოკუმენტაცია
@@ -136,7 +136,7 @@ function DesktopNavigation(props) {
         <NavItem href="/">მთავარი</NavItem>
         <NavItem href="/about">ინფორმაცია</NavItem>
         <NavItem
-          href="https://github.com/pgagnidze/ena/wiki/Documentation"
+          href="https://github.com/pgagnidze/ena/wiki"
           target="_blank"
         >
           დოკუმენტაცია
