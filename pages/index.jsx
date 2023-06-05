@@ -4,10 +4,11 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
 import { Logo } from "@/components/Logo";
-import TextareaAutosize from "react-textarea-autosize";
+import CustomTextArea from "@/components/Editor";
 
 export default function Home() {
   const inputRef = useRef(null);
+  const answerRef = useRef(null);
 
   const [conversationArr, setConversationArr] = useState([]);
   let [query, setQuery] = useState("");
@@ -16,6 +17,7 @@ export default function Home() {
   const [apiError, setApiError] = useState(null);
   const [collapsed, setCollapsed] = useState(true);
 
+  const [language, setLanguage] = useState("ge");
   const [showSettings, setShowSettings] = useState(false);
   const [apiKey, setApiKey] = useState("");
 
@@ -30,9 +32,33 @@ export default function Home() {
       return;
     }
 
+    const commands = [
+      { კოდი: "code" },
+      { განმარტება: "explain" },
+      { კომპლექსურობა: "complexity" },
+      { შეცდომა: "bug" },
+      { თარგმნა: "translate" },
+      { ლექსიკონი: "vocab" },
+      { ტესტი: "quiz" },
+      { კითხვა: "ask" },
+      { მაგალითი: "example" },
+    ];
+
+    const command = commands.find(
+      (command) =>
+        query.trim().startsWith(`/${Object.keys(command)[0]}`) ||
+        query.trim().startsWith(`/${Object.values(command)[0]}`)
+    );
+
+    if (!command) {
+      alert("Please enter a valid command.");
+      return;
+    }
+
     setAnswer("");
 
     setLoading(true);
+    answerRef.current?.scrollIntoView({ behavior: "smooth" });
 
     let newConvoArr = [...conversationArr];
 
@@ -42,6 +68,7 @@ export default function Home() {
         content: `
 Roleplay as a world-class expert on the programming languages and related concepts, and as a world-class teacher, following the instructions below.
 Response format: logged output only, sans explanation, in natural language.
+Response rules: clear, easy to understand, concise, and correct. 12 year old reading level. Favor brevity over verbosity.
 
 EnaBot {
   Code
@@ -57,20 +84,25 @@ EnaBot {
     Code will be everything after the /code command.
   }
 
-  /code [code] - set the code; provide a brief introduction about EnaBot, then list available commands with descriptions.
+  /code [code] - set the code for usage and tell the user the code is successfully set. Do not explain the code or run the other commands until the user sends relevant commands.
   /explain - provide an explanation of the code.
-  /complexity - provide a time complexity analysis of this code.
-  /bug - explain the bug in the code if there is one. Provide a fix if possible and explain the fix.
-  /translate [target proramming language] - translate it into a target programming language.
+  /complexity - provide a time complexity analysis of the code.
+  /bug - explain the bug in the code if there is one; provide a fix if possible and explain the fix.
+  /translate [target proramming language] - translate the code into a target programming language.
   /vocab - List a glossary of essential related terms with brief, concise definitions.
-  /quiz Generate a concise question to test the student on their comprehension. Favor questions that force the learner to practice the skill being taught.
-  /help - List commands with descriptions.
+  /quiz - Generate a concise question to test the student on their comprehension. Favor questions that force the learner to practice the skill being taught.
+  /ask - [question] - answer a question.
 }
 `,
       });
     }
 
-    if (!query.trim().startsWith("/")) {
+    query = query.replace(
+      `/${Object.keys(command)[0]}`,
+      `/${Object.values(command)[0]}`
+    );
+
+    if (query.trim().startsWith("/ask") && language === "ge") {
       const translatedEn = await fetch("/api/translate", {
         method: "POST",
         headers: {
@@ -110,6 +142,8 @@ EnaBot {
       return;
     }
 
+    if (language === "en") setLoading(false);
+
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
@@ -122,23 +156,24 @@ EnaBot {
       completeAnswer += chunkValue;
       // Streams work only with edge runtime
       // We need stream and chunks to avoid vercel serverless function timeout 10 seconds
-      // Disabled for now because the translation is working better when we pass the complete answer
-      // setAnswer((prev) => prev + chunkValue);
+      // Enabled for english language for now because the translation is working better when we pass the complete answer
+      if (language === "en") setAnswer((prev) => prev + chunkValue);
     }
 
-    const translatedGe = await fetch("/api/translate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query: completeAnswer, lang: "ka" }),
-    });
+    if (language === "ge") {
+      const translatedGe = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: completeAnswer, lang: "ka" }),
+      });
 
-    const translatedAnswer = await translatedGe.text();
+      const translatedAnswer = await translatedGe.text();
+      setLoading(false);
+      setAnswer(translatedAnswer);
+    }
 
-    setLoading(false);
-
-    setAnswer(translatedAnswer);
     const newConversationArr = [
       ...newConvoArr,
       {
@@ -179,14 +214,21 @@ EnaBot {
 
   const handleClear = () => {
     localStorage.removeItem("PG_KEY");
+    localStorage.removeItem("PG_LANGUAGE");
     setApiKey("");
+    setLanguage("ge");
   };
 
   useEffect(() => {
     const PG_KEY = localStorage.getItem("PG_KEY");
+    const PG_LANGUAGE = localStorage.getItem("PG_LANGUAGE");
 
     if (PG_KEY) {
       setApiKey(PG_KEY);
+    }
+
+    if (PG_LANGUAGE) {
+      setLanguage(PG_LANGUAGE);
     }
 
     inputRef.current?.focus();
@@ -205,7 +247,7 @@ EnaBot {
       </Head>
 
       <Container className="mt-8 sm:mt-32">
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col min-h-screen justify-between">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
               <div className="h-24 w-full flex justify-center items-center">
@@ -217,10 +259,20 @@ EnaBot {
               >
                 {showSettings ? "დამალე" : "მაჩვენე"} პარამეტრები
               </button>
-              <div className="mt-6 text-center text-lg">{`AI-ით აღჭურვილი დამხმარე ენა პროგრამირების ენისთვის.`}</div>
+              <div className="mb-6 mt-6 text-center text-lg">{`AI დამხმარე პროგრამირების ენებისთვის.`}</div>
 
               {showSettings && (
                 <div className="w-[340px] sm:w-[400px]">
+                  <div>
+                    <select
+                      className="bg-white max-w-[400px] block w-full cursor-pointer rounded-md border border-gray-300 p-2 text-black shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                    >
+                      <option value="ge">ქართული</option>
+                      <option value="en">ინგლისური</option>
+                    </select>
+                  </div>
                   <div className="mt-2">
                     <input
                       type="password"
@@ -257,13 +309,11 @@ EnaBot {
 
               {apiKey.length === 51 && !showSettings ? (
                 <div className="relative w-full mt-4">
-                  <TextareaAutosize
-                    minRows={1}
-                    style={{ resize: "none" }}
-                    className="h-auto w-full rounded-md border border-zinc-600 pr-12 pl-6 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 sm:h-auto sm:py-2 sm:pr-16 sm:pl-8 sm:text-lg"
-                    value={query}
-                    placeholder="დასაწყებად აკრიფეთ /code [code]."
-                    onChange={(e) => setQuery(e.target.value)}
+                  <CustomTextArea
+                    query={query}
+                    setQuery={setQuery}
+                    placeholder="დააჭირეთ `/` ბრძანებების ჩვენებისთვის"
+                    language={language}
                   />
                   <button>
                     <IconArrowRight
@@ -284,10 +334,10 @@ EnaBot {
                   პარამეტრებში.
                 </div>
               )}
-
+              <div ref={answerRef}></div>
               {loading ? (
                 <div className="mt-6 w-full">
-                  <div className="font-bold text-2xl">Answer</div>
+                  <div className="font-bold text-2xl">პასუხი</div>
                   <div className="animate-pulse mt-2">
                     <div className="h-4 bg-gray-300 rounded"></div>
                     <div className="h-4 bg-gray-300 rounded mt-2"></div>
@@ -303,41 +353,43 @@ EnaBot {
                 </div>
               ) : (
                 <>
-                  <button
-                    className="text-gray-500 mt-4"
-                    onClick={toggleCollapse}
-                  >
-                    {collapsed ? "მაჩვენე მაგალითი" : "დამალე მაგალითი"}
-                  </button>
-                  {!collapsed && (
-                    <p className="text-gray-600 mb-2">
-                      <br />
-                      <code>
-                        /code ფუნქცია ფაქტორიალი(ნ = 6) &#123;
+                  <div className="invisible">
+                    <button
+                      className="text-gray-500 mt-4"
+                      onClick={toggleCollapse}
+                    >
+                      {collapsed ? "მაჩვენე მაგალითი" : "დამალე მაგალითი"}
+                    </button>
+                    {!collapsed && (
+                      <p className="text-gray-600 mb-2">
                         <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;თუ ნ != 0 &#123;
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე
-                        ნ * ფაქტორიალი(ნ - 1)
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&#125; თუარა &#123;
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე
-                        1
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&#125;
-                        <br />
-                        &#125;
-                        <br />
-                        <br />
-                        ფუნქცია მთავარი() &#123;
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ფაქტორიალი()
-                        <br />
-                        &#125;
-                      </code>
-                    </p>
-                  )}
+                        <code>
+                          /code ფუნქცია ფაქტორიალი(ნ = 6) &#123;
+                          <br />
+                          &nbsp;&nbsp;&nbsp;&nbsp;თუ ნ != 0 &#123;
+                          <br />
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე
+                          ნ * ფაქტორიალი(ნ - 1)
+                          <br />
+                          &nbsp;&nbsp;&nbsp;&nbsp;&#125; თუარა &#123;
+                          <br />
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე
+                          1
+                          <br />
+                          &nbsp;&nbsp;&nbsp;&nbsp;&#125;
+                          <br />
+                          &#125;
+                          <br />
+                          <br />
+                          ფუნქცია მთავარი() &#123;
+                          <br />
+                          &nbsp;&nbsp;&nbsp;&nbsp;დააბრუნე ფაქტორიალი()
+                          <br />
+                          &#125;
+                        </code>
+                      </p>
+                    )}
+                  </div>
                 </>
               )}
             </div>
