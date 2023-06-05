@@ -145,7 +145,7 @@ const CustomTextArea = ({ query, setQuery, placeholder, language }) => {
   return (
     <div className="relative w-full">
       <TextareaAutosize
-        minRows={1}
+        minRows={4}
         style={{ resize: "none" }}
         className="h-auto w-full rounded-md border border-zinc-600 pr-12 pl-6 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 sm:h-auto sm:py-2 sm:pr-16 sm:pl-8 sm:text-lg"
         value={query}

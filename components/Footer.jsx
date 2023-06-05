@@ -28,8 +28,8 @@ const navigation = [
 export function Footer() {
   return (
     <footer className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
-        <div className="flex justify-center space-x-6 md:order-2">
+      <div className="flex flex-col items-center mx-auto max-w-7xl px-6 py-12 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div className="flex justify-center space-x-6 order-2 md:order-2">
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -46,15 +46,19 @@ export function Footer() {
         <Link
           href="https://ena--lang-org.translate.goog/?_x_tr_sl=ka&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true"
           target="_blank"
-          className={clsx(
-            "block px-3 py-2 transition",
-            "text-gray-500 hover:text-gray-900",
-            "bg-gray-200 hover:bg-gray-300 rounded-md"
-          )}
         >
-          EN
+          <div
+            className={clsx(
+              "block px-3 py-2 transition",
+              "text-gray-500 hover:text-gray-900",
+              "bg-gray-200 hover:bg-gray-300 rounded-md",
+              "w-8 h-8 flex items-center justify-center mb-2"
+            )}
+          >
+            EN
+          </div>
         </Link>
-        <div className="mt-8 md:order-1 md:mt-0">
+        <div className="mt-8 order-1 md:order-1 md:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
             შექმნილია
             <a
