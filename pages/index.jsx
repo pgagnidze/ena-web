@@ -247,7 +247,7 @@ EnaBot {
       </Head>
 
       <Container className="mt-8 sm:mt-16 py-4">
-        <div className="flex flex-col min-h-full justify-between">
+        <div className="flex flex-col min-h-screen justify-between">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
               <div className="h-24 w-full flex justify-center items-center">
