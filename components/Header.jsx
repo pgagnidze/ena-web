@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
-
 import { Container } from "@/components/Container";
 
 function CloseIcon(props) {
@@ -91,7 +90,8 @@ function MobileNavigation(props) {
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
                 <MobileNavItem href="/">მთავარი</MobileNavItem>
-                <MobileNavItem href="/about">ინფორმაცია</MobileNavItem>
+                <MobileNavItem href="/enabot">აი ენა</MobileNavItem>
+                <MobileNavItem href="/about">დეტალები</MobileNavItem>
                 <MobileNavItem
                   href="https://github.com/pgagnidze/ena/wiki"
                   target={"_blank"}
@@ -116,7 +116,7 @@ function NavItem({ href, target, children }) {
         href={href}
         target={target}
         className={clsx(
-          "relative block px-3 py-2 transition",
+          "relative block px-3 py-2 transition whitespace-nowrap",
           isActive ? "text-gray-500/70" : "hover:text-gray-500/70"
         )}
       >
@@ -129,16 +129,15 @@ function NavItem({ href, target, children }) {
   );
 }
 
+
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
         <NavItem href="/">მთავარი</NavItem>
-        <NavItem href="/about">ინფორმაცია</NavItem>
-        <NavItem
-          href="https://github.com/pgagnidze/ena/wiki"
-          target="_blank"
-        >
+        <NavItem href="/enabot">აი ენა</NavItem>
+        <NavItem href="/about">დეტალები</NavItem>
+        <NavItem href="https://github.com/pgagnidze/ena/wiki" target="_blank">
           დოკუმენტაცია
         </NavItem>
       </ul>
@@ -146,66 +145,12 @@ function DesktopNavigation(props) {
   );
 }
 
-function clamp(number, a, b) {
-  let min = Math.min(a, b);
-  let max = Math.max(a, b);
-  return Math.min(Math.max(number, min), max);
-}
-
 export function Header() {
-  let isHomePage = useRouter().pathname === "/";
-
-  let headerRef = useRef();
-  let isInitial = useRef(true);
-
-  useEffect(() => {
-    function setProperty(property, value) {
-      document.documentElement.style.setProperty(property, value);
-    }
-
-    function removeProperty(property) {
-      document.documentElement.style.removeProperty(property);
-    }
-
-    function updateHeaderStyles() {
-      if (isInitial.current) {
-        setProperty("--header-position", "sticky");
-      }
-    }
-
-    function updateStyles() {
-      updateHeaderStyles();
-      isInitial.current = false;
-    }
-
-    updateStyles();
-    window.addEventListener("scroll", updateStyles, { passive: true });
-    window.addEventListener("resize", updateStyles);
-
-    return () => {
-      window.removeEventListener("scroll", updateStyles);
-      window.removeEventListener("resize", updateStyles);
-    };
-  }, [isHomePage]);
-
   return (
     <>
-      <header
-        className="pointer-events-none relative z-50 flex flex-col"
-        style={{
-          height: "var(--header-height)",
-          marginBottom: "var(--header-mb)",
-        }}
-      >
-        <div
-          ref={headerRef}
-          className="top-0 z-10 h-16 pt-6"
-          style={{ position: "var(--header-position)" }}
-        >
-          <Container
-            className="top-[var(--header-top,theme(spacing.6))] w-full"
-            style={{ position: "var(--header-inner-position)" }}
-          >
+      <header className="pointer-events-none relative z-50 flex flex-col">
+        <div className="top-0 py-6">
+          <Container>
             <div className="relative flex gap-4">
               <div className="flex flex-1"></div>
               <div className="flex flex-1 justify-end md:justify-center">
