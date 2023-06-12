@@ -47,7 +47,6 @@ const CodeEditorWindow = ({ onChange, language, code, theme }) => {
 const OutputWindow = ({ outputDetails }) => {
   const getOutput = () => {
     let status = outputDetails?.status;
-    console.log(status);
 
     if (status === "error") {
       return (
@@ -116,8 +115,6 @@ export const CodeEditor = () => {
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
-      console.log("enterPress", enterPress);
-      console.log("ctrlPress", ctrlPress);
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
