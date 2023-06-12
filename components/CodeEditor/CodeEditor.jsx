@@ -54,13 +54,19 @@ const OutputWindow = ({ outputDetails }) => {
           {outputDetails?.error}
         </pre>
       );
-    } else if (status === "ok") {
+    } else if (status === "success") {
+      let outputValues = Object.values(outputDetails.body.output);
       return (
-        <pre className="px-2 py-1 font-normal text-xs text-green-500">
-          {outputDetails.body.result !== null
-            ? JSON.stringify(outputDetails.body.result)
-            : null}
-        </pre>
+        <>
+          <pre className="px-2 py-1 font-normal text-xs text-green-500">
+            {outputDetails.body.result !== null
+              ? "result:\n" + JSON.stringify(outputDetails.body.result)
+              : null}
+          </pre>
+          <pre className="px-2 py-1 font-normal text-xs text-green-500">
+            {"stdout:\n" + outputValues.join("")}
+          </pre>
+        </>
       );
     }
   };
@@ -152,7 +158,7 @@ export const CodeEditor = () => {
       return;
     }
 
-    if (response.status === "ok") {
+    if (response.status === "success") {
       setOutputDetails(response);
       showSuccessToast(`წარმატებით გაეშვა!`);
       setProcessing(false);
