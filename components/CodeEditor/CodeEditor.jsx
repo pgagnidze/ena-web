@@ -81,13 +81,23 @@ const CodeEditorWindow = ({ onChange, language, code, theme }) => {
 };
 
 const OutputWindow = ({ outputDetails }) => {
+  const defaultOutputDetails = {
+    status: "success",
+    body: {
+      result: null,
+      output: {},
+    },
+  };
+
+  outputDetails = outputDetails || defaultOutputDetails;
+
   const getOutput = () => {
-    let status = outputDetails?.status;
+    let status = outputDetails.status;
 
     if (status === "error") {
       return (
         <pre className="px-2 py-1 font-normal text-xs text-red-500">
-          {outputDetails?.error}
+          {outputDetails.error}
         </pre>
       );
     } else if (status === "success") {
@@ -96,23 +106,23 @@ const OutputWindow = ({ outputDetails }) => {
         <>
           <pre className="px-2 py-1 font-normal text-xs text-green-500">
             {outputDetails.body.result !== null
-              ? "result:\n" + JSON.stringify(outputDetails.body.result)
-              : null}
+              ? "შედეგი:\n" + JSON.stringify(outputDetails.body.result)
+              : "შედეგი:"}
           </pre>
           <pre className="px-2 py-1 font-normal text-xs text-green-500">
-            {"stdout:\n" + outputValues.join("")}
+            {outputValues.length > 0
+              ? "დაბეჭდილი:\n" + outputValues.join("")
+              : "დაბეჭდილი:"}
           </pre>
         </>
       );
     }
   };
+
   return (
     <>
-      <h1 className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 mb-2">
-        შედეგი
-      </h1>
-      <div className="w-full h-56 bg-gray-700 rounded-md text-white font-normal text-sm overflow-y-auto">
-        {outputDetails ? <>{getOutput()}</> : null}
+      <div className="w-full h-85vh bg-[#1b2b34] rounded-md text-white font-normal text-sm overflow-y-auto">
+        {getOutput()}
       </div>
     </>
   );
