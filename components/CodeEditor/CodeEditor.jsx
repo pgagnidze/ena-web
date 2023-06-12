@@ -210,8 +210,8 @@ export const CodeEditor = () => {
 
         <div className="h-4 w-full py-5"></div>
 
-        <div className="flex flex-row space-x-4 items-start px-4 py-4">
-          <div className="flex flex-col w-full h-full justify-start items-end">
+        <div className="flex flex-col md:flex-row space-x-4 items-start px-4 py-4">
+          <div className="flex flex-col w-full md:w-2/3 h-64 md:h-auto justify-start items-end">
             <CodeEditorWindow
               code={code}
               onChange={onChange}
@@ -220,7 +220,7 @@ export const CodeEditor = () => {
             />
           </div>
 
-          <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
+          <div className="right-container flex flex-shrink-0 w-full md:w-1/3 flex-col mt-4 md:mt-0 md:pl-4 pr-4">
             <OutputWindow outputDetails={outputDetails} />
             <div className="flex flex-col items-end">
               <button
