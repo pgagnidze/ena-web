@@ -53,7 +53,7 @@ export function Hero() {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden min-h-screen">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div className="mx-auto grid grid-cols-1 items-center gap-x-10 gap-y-20 px-6 lg:grid-cols-2 lg:px-10 xl:gap-x-20 xl:px-14">
           <div className="relative z-10 md:text-center lg:text-left">
@@ -67,6 +67,7 @@ export function Hero() {
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href="/enabot">დაიწყე სწავლა</Button>
+                <Button href="/code" variant="modern">გამოსცადე აქვე</Button>
                 <Button
                   href="https://github.com/pgagnidze/ena"
                   target="_blank"
