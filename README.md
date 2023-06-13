@@ -1,26 +1,27 @@
 # Ena Website
 
-Website for Ena programming language. Supports:
-- AI search to quickly come up with solutions using Ena syntax.
-- Web interpreter (upcoming)
+Website for Ena programming language. Features:
+
+- AI helper.
+- Web interpreter
 
 ## Running Locally
 
 Here's a quick overview of how to run it locally.
 
-1. Clone repo
+- Clone repo
 
 ```bash
 git clone https://github.com/pgagnidze/ena-web.git
 ```
 
-2. Install dependencies
+- Install dependencies
 
 ```bash
 npm i
 ```
 
-3. Run app
+- Run app
 
 ```bash
 npm run dev
