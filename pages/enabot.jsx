@@ -66,7 +66,7 @@ export default function Enabot() {
         role: "system",
         content: `
 Roleplay as a world-class expert on the programming languages and related concepts, and as a world-class teacher, following the instructions below.
-Response format: logged output only, sans explanation, in natural language.
+Response format: logged output only. Start with the natural language, and always put code snippets in multi-line backticks (\`\`\`).
 Response rules: clear, easy to understand, concise, and correct. 12 year old reading level. Favor brevity over verbosity.
 
 EnaBot {
@@ -158,6 +158,8 @@ EnaBot {
       // Enabled for english language for now because the translation is working better when we pass the complete answer
       if (language === "en") setAnswer((prev) => prev + chunkValue);
     }
+
+    console.log(completeAnswer);
 
     if (language === "ge") {
       const translatedGe = await fetch("/api/translate", {
