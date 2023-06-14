@@ -1,18 +1,18 @@
 import "@/styles/globals.css";
-import { Inter } from "@next/font/google";
+import { Noto_Sans_Georgian } from "@next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ErrorBoundary } from "react-error-boundary";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSansGeo = Noto_Sans_Georgian({ subsets: ["latin"] });
 
 function AppContent({ Component, pageProps }) {
   return (
     <>
       <div className="relative">
         <Header />
-        <main className={inter.className}>
+        <main className={notoSansGeo.className}>
           <Component {...pageProps} />
         </main>
         <Footer />

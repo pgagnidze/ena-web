@@ -26,6 +26,7 @@ const monacoThemes = {
   merbivore: "Merbivore",
   "monokai-bright": "Monokai Bright",
   monokai: "Monokai",
+  nord: "Nord",
   "night-owl": "Night Owl",
   "oceanic-next": "Oceanic Next",
   "pastels-on-dark": "Pastels on Dark",

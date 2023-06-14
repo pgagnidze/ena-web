@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { defineTheme } from "./defineTheme";
 import { PlayIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ClockLoader } from "react-spinners";
+import { Container } from "@/components/Container";
 
 const javascriptDefault = `ფუნქცია ფაქტორიალი(ნ = 6) {
   თუ ნ != 0 {
@@ -68,7 +69,7 @@ const CodeEditorWindow = ({ onChange, language, code, theme }) => {
   return (
     <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl">
       <Editor
-        height="85vh"
+        height="65vh"
         width={`100=%`}
         language={language || "javascript"}
         value={value}
@@ -96,7 +97,7 @@ const OutputWindow = ({ outputDetails }) => {
 
     if (status === "error") {
       return (
-        <pre className="px-2 py-1 font-normal text-xs text-red-500">
+        <pre className="px-2 py-1 font-normal text-xs text-nord11">
           {outputDetails.error}
         </pre>
       );
@@ -104,12 +105,12 @@ const OutputWindow = ({ outputDetails }) => {
       let outputValues = Object.values(outputDetails.body.output);
       return (
         <>
-          <pre className="px-2 py-1 font-normal text-xs text-green-500">
+          <pre className="px-2 py-1 font-normal text-xs text-nord14-100">
             {outputDetails.body.result !== null
               ? "შედეგი:\n" + JSON.stringify(outputDetails.body.result)
               : "შედეგი:"}
           </pre>
-          <pre className="px-2 py-1 font-normal text-xs text-green-500">
+          <pre className="px-2 py-1 font-normal text-xs text-nord14-100">
             {outputValues.length > 0
               ? "დაბეჭდილი:\n" + outputValues.join("")
               : "დაბეჭდილი:"}
@@ -121,7 +122,7 @@ const OutputWindow = ({ outputDetails }) => {
 
   return (
     <>
-      <div className="w-full h-85vh bg-[#1b2b34] rounded-md text-white font-normal text-sm overflow-y-auto">
+      <div className="w-full h-65vh bg-nord0 rounded-md text-white font-normal text-sm overflow-y-auto">
         {getOutput()}
       </div>
     </>
@@ -218,8 +219,8 @@ export const CodeEditor = () => {
   };
 
   useEffect(() => {
-    defineTheme("oceanic-next").then((_) =>
-      setTheme({ value: "oceanic-next", label: "Oceanic Next" })
+    defineTheme("nord").then((_) =>
+      setTheme({ value: "nord", label: "Nord" })
     );
   }, []);
 
@@ -248,6 +249,7 @@ export const CodeEditor = () => {
 
   return (
     <>
+    <Container>
       <div className="overflow-hidden min-h-screen">
         <ToastContainer
           position="top-right"
@@ -284,6 +286,7 @@ export const CodeEditor = () => {
           </div>
         </div>
       </div>
+      </Container>
     </>
   );
 };

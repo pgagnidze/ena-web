@@ -248,12 +248,12 @@ EnaBot {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container className="mt-8 sm:mt-16 py-4">
+      <Container>
         <div className="flex flex-col min-h-screen justify-between">
           <div className="flex-1 overflow-auto">
             <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
               <div className="flex flex-col items-center space-y-4">
-                <h1 className="text-2xl sm:text-3xl font-bold text-center bg-gradient-to-r from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display tracking-tight text-transparent">
+                <h1 className="text-2xl sm:text-3xl pb-2 font-bold text-center bg-gradient-to-r from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display tracking-tight text-transparent">
                   აი ენა
                 </h1>
                 <p className="text-center text-gray-500">
