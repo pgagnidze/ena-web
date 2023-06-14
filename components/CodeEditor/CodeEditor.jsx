@@ -271,7 +271,7 @@ export const CodeEditor = () => {
           handleDelete={handleDelete}
         />
 
-        <div className="flex flex-col md:flex-row space-x-4 items-start px-4 py-4">
+        <div className="flex flex-col md:flex-row space-x items-start px-4 py-4">
           <div className="flex flex-col w-full md:w-2/3 h-64 md:h-auto justify-start items-end">
             <CodeEditorWindow
               code={code}
@@ -281,7 +281,7 @@ export const CodeEditor = () => {
             />
           </div>
 
-          <div className="right-container flex flex-shrink-0 w-full md:w-1/3 flex-col mt-4 md:mt-0 md:pl-4 pr-4">
+          <div className="right-container flex flex-shrink-0 w-full md:w-1/3 flex-col mt-4 md:mt-0 md:pl-4">
             <OutputWindow outputDetails={outputDetails} />
           </div>
         </div>

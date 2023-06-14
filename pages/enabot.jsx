@@ -329,7 +329,7 @@ EnaBot {
                   </button>
                 </div>
               ) : (
-                <div className="text-center font-bold text-3xl mt-7">
+                <div className="text-center font-bold text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mt-7">
                   გთხოვთ შეიყვანოთ თქვენი
                   <a
                     className="mx-2 underline hover:opacity-50"

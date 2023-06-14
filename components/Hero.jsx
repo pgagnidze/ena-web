@@ -61,12 +61,8 @@ export function Hero() {
           <div className="mx-auto grid grid-cols-1 items-center gap-x-10 gap-y-20 px-6 lg:grid-cols-2 lg:px-10 xl:gap-x-20 xl:px-14">
             <div className="relative z-10 md:text-center lg:text-left">
               <div className="relative">
-                <p className="inline bg-gradient-to-r py-2 from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-5xl tracking-tight text-transparent">
-                  პირველი ქართული
-                </p>
-                <div className="mt-3"></div>
-                <p className="inline bg-gradient-to-r from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-5xl tracking-tight text-transparent">
-                  პროგრამირების ენა
+                <p className="inline bg-gradient-to-r py-2 from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl tracking-tight text-transparent">
+                  პირველი ქართული პროგრამირების ენა
                 </p>
                 <p className="mt-3 text-2xl tracking-tight text-gray-500">
                   <b>ენა</b> პროგრამირებას უფრო ხელმისაწვდომს ხდის ქართულენოვანი აუდიტორიისთვის
@@ -90,7 +86,7 @@ export function Hero() {
                 <div className="relative rounded-2xl bg-nord0 ring-1 ring-white/10 backdrop-blur">
                   <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-gray-400/0 via-gray-400/70 to-gray-400/0" />
                   <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-gray-400/0 via-gray-400 to-gray-400/0" />
-                  <div className="pl-4 pt-4">
+                  <div className="pl-4 pt-4 pr-4">
                     <div className="flex items-center justify-between">
                       <div>
                         <TrafficLightsIcon className="h-2.5 w-auto stroke-gray-300/30" />
