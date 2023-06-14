@@ -120,7 +120,7 @@ function MobileNavigation(props) {
                 <MobileNavItem href="/code">კოდის გამშვები</MobileNavItem>
                 {/* <MobileNavItem href="/about">დეტალები</MobileNavItem> */}
                 <MobileNavItem
-                  href="https://github.com/pgagnidze/ena/wiki"
+                  href="https://wiki.ena-lang.org/home"
                   target={"_blank"}
                 >
                   დოკუმენტაცია
@@ -169,7 +169,7 @@ function DesktopNavigation(props) {
         <NavItem href="/">მთავარი</NavItem>
         <NavItem href="/enabot">AI დამხმარე</NavItem>
         <NavItem href="/code">კოდის გამშვები</NavItem>
-        <NavItem href="https://github.com/pgagnidze/ena/wiki" target="_blank">
+        <NavItem href="https://wiki.ena-lang.org/home" target="_blank">
           დოკუმენტაცია
         </NavItem>
       </ul>
