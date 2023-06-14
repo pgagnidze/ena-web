@@ -159,8 +159,6 @@ EnaBot {
       if (language === "en") setAnswer((prev) => prev + chunkValue);
     }
 
-    console.log(completeAnswer);
-
     if (language === "ge") {
       const translatedGe = await fetch("/api/translate", {
         method: "POST",
