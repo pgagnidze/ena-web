@@ -69,8 +69,7 @@ export function Hero() {
                   პროგრამირების ენა
                 </p>
                 <p className="mt-3 text-2xl tracking-tight text-gray-500">
-                  ენა მიზნად ისახავს, ქართველებისთვის ხელმისაწვდომი გახადოს
-                  პროგრამირება, რაც გულისხმობს მშობლიურ ენაზე კოდის წერას.
+                  <b>ენა</b> პროგრამირებას უფრო ხელმისაწვდომს ხდის ქართულენოვანი აუდიტორიისთვის
                 </p>
                 <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                   <Button href="/enabot">დაიწყე სწავლა</Button>
