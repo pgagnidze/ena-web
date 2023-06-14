@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { ErrorBoundary } from "react-error-boundary";
 import { Analytics } from "@vercel/analytics/react";
 
-const notoSansGeo = Noto_Sans_Georgian({ subsets: ["latin"] });
+const notoSansGeo = Noto_Sans_Georgian({ subsets: ["georgian"] });
 
 function AppContent({ Component, pageProps }) {
   return (
