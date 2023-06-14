@@ -165,7 +165,7 @@ function NavItem({ href, target, children }) {
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
-      <ul className="flex rounded-md bg-white/90 px-3 text-sm font-medium text-zinc-500/90 shadow-lg shadow-zinc-700/5 ring-1 ring-zinc-800/5 backdrop-blur">
+      <ul className="flex rounded-md bg-white/90 px-3 text-base font-medium text-zinc-500/90 shadow-lg shadow-zinc-700/5 ring-1 ring-zinc-800/5 backdrop-blur">
         <NavItem href="/">მთავარი</NavItem>
         <NavItem href="/enabot">AI დამხმარე</NavItem>
         <NavItem href="/code">კოდის გამშვები</NavItem>

@@ -80,11 +80,11 @@ export function Features() {
     <section
       id="secondary-features"
       aria-label="Features for building a portfolio"
-      className="py-20 sm:py-32"
+      className="py-10 sm:py-20"
     >
       <Container>
         <div className="mx-auto max-w-2xl sm:text-center">
-          <p className="mt-2 text-lg text-gray-600">
+          <p className="mt-2 text-2xl text-gray-600">
             თქვენ შეგიძლიათ ისწავლოთ პროგრამირება და გახდეთ წარმატებული პროგრამისტი ჩვენი ვებ-გვერდის დახმარებით
           </p>
         </div>
@@ -97,11 +97,11 @@ export function Features() {
               key={feature.name}
               className="rounded-2xl border border-gray-200 p-8"
             >
-              <feature.icon className="h-6 w-6" />
-              <h3 className="mt-6 font-semibold text-gray-900">
+              <feature.icon className="h-8 w-8" />
+              <h3 className="mt-6 font-semibold text-gray-900 text-xl">
                 {feature.name}
               </h3>
-              <p className="mt-2 text-gray-700">{feature.description}</p>
+              <p className="mt-2 text-gray-700 text-lg">{feature.description}</p>
             </li>
           ))}
         </ul>

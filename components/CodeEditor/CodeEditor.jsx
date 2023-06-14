@@ -97,7 +97,7 @@ const OutputWindow = ({ outputDetails }) => {
 
     if (status === "error") {
       return (
-        <pre className="px-2 py-1 font-normal text-xs text-nord11">
+        <pre className="px-2 py-1 font-normal text-sm text-nord11">
           {outputDetails.error}
         </pre>
       );
@@ -105,12 +105,12 @@ const OutputWindow = ({ outputDetails }) => {
       let outputValues = Object.values(outputDetails.body.output);
       return (
         <>
-          <pre className="px-2 py-1 font-normal text-xs text-nord14-100">
+          <pre className="px-2 py-1 font-normal text-sm text-nord14-100">
             {outputDetails.body.result !== null
               ? "შედეგი:\n" + JSON.stringify(outputDetails.body.result)
               : "შედეგი:"}
           </pre>
-          <pre className="px-2 py-1 font-normal text-xs text-nord14-100">
+          <pre className="px-2 py-1 font-normal text-sm text-nord14-100">
             {outputValues.length > 0
               ? "დაბეჭდილი:\n" + outputValues.join("")
               : "დაბეჭდილი:"}

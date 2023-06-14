@@ -57,7 +57,7 @@ export function Hero() {
   return (
     <Container>
       <div className="overflow-hidden py-10 sm:px-2 lg:relative lg:px-0 lg:py-12">
-        <div className="py-6 bg-gradient-to-t from-white via-nord6-100 to-slate-50 border-t border-slate-400/10">
+        <div className="py-6 bg-gradient-to-t from-white via-nord6-100 to-slate-50 border-t border-slate-400/10 rounded-3xl">
           <div className="mx-auto grid grid-cols-1 items-center gap-x-10 gap-y-20 px-6 lg:grid-cols-2 lg:px-10 xl:gap-x-20 xl:px-14">
             <div className="relative z-10 md:text-center lg:text-left">
               <div className="relative">
