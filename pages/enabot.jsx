@@ -256,12 +256,15 @@ EnaBot {
                 <h1 className="text-2xl sm:text-3xl pb-2 font-bold text-center bg-gradient-to-r from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display tracking-tight text-transparent">
                   აი ენა
                 </h1>
+                <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+        ბეტა ვერსია
+      </span>
                 <p className="text-center text-gray-500">
                   AI დამხმარე პროგრამირების ენის შესწავლისთვის.
                 </p>
               </div>
               <button
-                className="my-4 flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-500 px-3 py-1 text-sm hover:opacity-50 text-gray-500"
+                className="my-4 flex cursor-pointer items-center space-x-2 rounded-md border border-zinc-500 px-3 py-1 text-sm hover:opacity-50 text-gray-500"
                 onClick={() => setShowSettings(!showSettings)}
               >
                 {showSettings ? "დამალე" : "მაჩვენე"} პარამეტრები
@@ -304,7 +307,7 @@ EnaBot {
                       გაასუფთავე
                     </div>
                     <div
-                      className="flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
+                      className="flex cursor-pointer items-center space-x-2 rounded-md border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
                       onClick={handleSave}
                     >
                       შეინახე
@@ -324,7 +327,7 @@ EnaBot {
                   <button>
                     <IconArrowRight
                       onClick={handleAnswer}
-                      className="absolute right-2 top-2.5 h-7 w-7 rounded-full bg-gray-500 p-1 hover:cursor-pointer hover:bg-gray-600 sm:right-3 sm:top-3 sm:h-6 sm:w-10 text-white"
+                      className="absolute right-2 top-2.5 h-7 w-7 rounded-md bg-gray-500 p-1 hover:cursor-pointer hover:bg-gray-600 sm:right-3 sm:top-3 sm:h-6 sm:w-10 text-white"
                     />
                   </button>
                 </div>

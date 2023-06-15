@@ -109,7 +109,7 @@ export function Hero() {
                         <div
                           key={index}
                           className={clsx(
-                            "flex h-6 rounded-full cursor-pointer",
+                            "flex h-6 rounded-md cursor-pointer",
                             activeTab === index
                               ? "bg-gradient-to-r from-gray-400/30 via-gray-400 to-gray-400/30 p-px font-medium text-gray-300"
                               : "text-gray-500"
@@ -118,7 +118,7 @@ export function Hero() {
                         >
                           <div
                             className={clsx(
-                              "flex items-center rounded-full px-2.5",
+                              "flex items-center rounded-md px-2.5",
                               activeTab === index && "bg-gray-800"
                             )}
                           >
