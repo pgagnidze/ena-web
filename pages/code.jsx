@@ -5,7 +5,7 @@ export default function Code() {
   return (
     <>
       <Head>
-        <title>ენა - Ena - გაუშვი კოდი</title>
+        <title>ენა - გაუშვი კოდი</title>
         <meta
           name="description"
           content={`

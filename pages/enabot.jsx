@@ -236,7 +236,7 @@ EnaBot {
   return (
     <>
       <Head>
-        <title>ენა - Ena - AI დამხმარე პროგრამირების ენის შესწავლისთვის</title>
+        <title>ენა - AI დამხმარე პროგრამირების ენის შესწავლისთვის</title>
         <meta
           name="description"
           content={`

@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ენა - Ena - პირველი ქართული პროგრამირების ენა</title>
+        <title>ენა - პირველი ქართული პროგრამირების ენა</title>
         <meta
           name="description"
           content={`
