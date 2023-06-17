@@ -65,7 +65,7 @@ export function Hero() {
                   პირველი ქართული პროგრამირების ენა
                 </p>
                 <p className="mt-3 text-2xl tracking-tight text-gray-500">
-                  <b>ენა</b> პროგრამირებას ხელმისაწვდომს ხდის ქართლ ენაზე
+                  <b>ენა</b> პროგრამირებას ხელმისაწვდომს ხდის ქართულ ენაზე
                 </p>
                 <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                   <Button href="/enabot">დაიწყე სწავლა</Button>
