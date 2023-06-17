@@ -85,7 +85,7 @@ export function Features() {
       <Container>
         <div className="mx-auto max-w-2xl sm:text-center">
           <p className="mt-2 text-2xl text-gray-600">
-            თქვენ შეგიძლიათ ისწავლოთ პროგრამირება და გახდეთ წარმატებული პროგრამისტი ჩვენი ვებ-გვერდის დახმარებით
+            თქვენ შეგიძლიათ ისწავლოთ პროგრამირება და გახდეთ წარმატებული პროგრამისტი <b>ენას</b> დახმარებით 
           </p>
         </div>
         <ul
@@ -98,10 +98,10 @@ export function Features() {
               className="rounded-2xl border border-gray-200 p-8"
             >
               <feature.icon className="h-8 w-8" />
-              <h3 className="mt-6 font-semibold text-gray-900 text-xl">
+              <h3 className="mt-6 font-semibold text-gray-900 text-lg">
                 {feature.name}
               </h3>
-              <p className="mt-2 text-gray-700 text-lg">{feature.description}</p>
+              <p className="mt-2 text-gray-700 text-base">{feature.description}</p>
             </li>
           ))}
         </ul>
