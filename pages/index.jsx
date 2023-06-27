@@ -8,12 +8,12 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ენა - პირველი ქართული პროგრამირების ენა</title>
+        <title>ენა - ქართული პროგრამირების ენა</title>
         <meta
           name="description"
           content={`
-          ენა - პირველი ქართული პროგრამირების ენა
-          Ena - The first Georgian programming language
+          ენა - ქართული პროგრამირების ენა
+          Ena - Georgian programming language
           `}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

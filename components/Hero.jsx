@@ -62,7 +62,7 @@ export function Hero() {
             <div className="relative z-10 md:text-center lg:text-left">
               <div className="relative">
                 <p className="inline bg-gradient-to-r py-2 from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl tracking-tight text-transparent">
-                  პირველი ქართული პროგრამირების ენა
+                  ქართული პროგრამირების ენა
                 </p>
                 <p className="mt-3 text-2xl tracking-tight text-gray-500">
                   <b>ენა</b> პროგრამირებას ხელმისაწვდომს ხდის ქართულ ენაზე
