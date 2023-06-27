@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
+import { LogoCloud } from "@/components/LogoCloud";
 import { FAQ } from "@/components/Faqs";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
 
       <Hero />
       <Features />
+      <LogoCloud />
       <FAQ />
     </>
   );
