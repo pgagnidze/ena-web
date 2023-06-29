@@ -33,13 +33,14 @@ const handler = async (
       throw new Error("octoai returned an error: " + (await res.text()));
     }
 
-    return NextResponse.json(await res.json());
+    return NextResponse.json(await res.json(), { headers });
   } catch (error) {
-    return NextResponse.json({
-      status: 500,
-      headers,
-      error: "headline handler returned an error: " + error,
-    });
+    return NextResponse.json(
+      {
+        error: "headline handler returned an error: " + error,
+      },
+      { status: 500, headers }
+    );
   }
 };
 
