@@ -6,6 +6,7 @@ export const allowedOrigins = [
   "http://localhost:3000",
   "https://ena-lang.org",
   "https://ena--lang-org.translate.goog",
+  "https://ena--bj10rc0zz--pgagnidze-vercel-app.translate.goog",
 ];
 
 const setHeaders = (
