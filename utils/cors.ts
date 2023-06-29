@@ -14,7 +14,7 @@ const setHeaders = (
   headersWrapper: { set: any }
 ) => {
   if (origin && allowedOrigins.includes(origin)) {
-    headersWrapper.set("Access-Control-Allow-Origin", origin);
+    headersWrapper.set("Access-Control-Allow-Origin", "*");
   }
   headersWrapper.set("Access-Control-Allow-Credentials", "true");
   headersWrapper.set(
