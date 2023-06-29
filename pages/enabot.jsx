@@ -12,6 +12,7 @@ export default function Enabot() {
   const [conversationArr, setConversationArr] = useState([]);
   let [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
+  const [headline, setHeadline] = useState("");
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
   const [collapsed, setCollapsed] = useState(true);
@@ -55,6 +56,7 @@ export default function Enabot() {
     }
 
     setAnswer("");
+    setHeadline("");
 
     setLoading(true);
     answerRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -160,6 +162,28 @@ EnaBot {
     }
 
     if (language === "ge") {
+      const headlineResponse = await fetch("/api/headline", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: completeAnswer }),
+      });
+
+      const headlineResponseJson = await headlineResponse.json();
+      const translatedHeadline = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: headlineResponseJson.output.text,
+          lang: "ka",
+        }),
+      });
+
+      const translatedHeadlineText = await translatedHeadline.text();
+      setHeadline(translatedHeadlineText);
       const translatedGe = await fetch("/api/translate", {
         method: "POST",
         headers: {
@@ -167,7 +191,6 @@ EnaBot {
         },
         body: JSON.stringify({ query: completeAnswer, lang: "ka" }),
       });
-
       const translatedAnswer = await translatedGe.text();
       setLoading(false);
       setAnswer(translatedAnswer);
@@ -257,8 +280,8 @@ EnaBot {
                   აი ენა
                 </h1>
                 <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
-        ბეტა ვერსია
-      </span>
+                  ბეტა ვერსია
+                </span>
                 <p className="text-center text-gray-500">
                   AI დამხმარე პროგრამირების ენის შესწავლისთვის.
                 </p>
@@ -356,7 +379,7 @@ EnaBot {
                 </div>
               ) : answer ? (
                 <div className="mt-6">
-                  <Answer text={answer} />
+                  <Answer text={answer} headline={headline} />
                 </div>
               ) : (
                 <>

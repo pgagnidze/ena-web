@@ -3,6 +3,12 @@
   opacity: 0;
 }
 
+.headline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
