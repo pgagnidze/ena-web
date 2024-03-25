@@ -27,6 +27,12 @@ npm i
 npm run dev
 ```
 
+## Useful Links
+
+[Fly](https://fly.io/apps/ena-api)
+
+[GCP](https://console.cloud.google.com/apis/credentials?project=ena-lang&supportedpurview=project)
+
 ## Credits
 
 Thanks to [Mckay Wrigley](https://github.com/mckaywrigley/paul-graham-gpt) for the initial source code.
