@@ -58,7 +58,7 @@ export function Hero() {
 
   return (
     <Container>
-      <div className="overflow-hidden py-12 sm:px-2 lg:relative lg:px-0 lg:py-12">
+      <div className="overflow-hidden py-4 sm:px-2 lg:relative lg:px-0 lg:py-4">
         <div className="py-6 bg-nord6-100 border-slate-400/10 border rounded-3xl">
           <div className="mx-auto grid grid-cols-1 items-center gap-x-10 gap-y-20 px-6 lg:grid-cols-2 lg:px-10 xl:gap-x-20 xl:px-14">
             <div className="relative z-10 md:text-center lg:text-left">
