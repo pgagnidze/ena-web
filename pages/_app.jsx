@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import { Noto_Sans_Georgian } from "next/font/google";
-import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ErrorBoundary } from "react-error-boundary";
 import { Analytics } from "@vercel/analytics/react";
@@ -11,11 +10,9 @@ function AppContent({ Component, pageProps }) {
   return (
     <>
       <div className="relative">
-        <Header />
-        <main className={notoSansGeo.className}>
+        <main className={`${notoSansGeo.className}`}>
           <Component {...pageProps} />
         </main>
-        <Footer />
       </div>
       <Analytics />
     </>

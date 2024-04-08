@@ -77,31 +77,22 @@ function Document(props) {
 
 export function Features() {
   return (
-    <section
-      id="secondary-features"
-      aria-label="Features for building a portfolio"
-      className="py-10 sm:py-20"
-    >
+    <section>
       <Container>
-        <div className="mx-auto max-w-2xl sm:text-center">
-          <p className="mt-2 text-2xl text-gray-600">
-            თქვენ შეგიძლიათ ისწავლოთ პროგრამირება და გახდეთ წარმატებული პროგრამისტი <b>ენას</b> დახმარებით 
-          </p>
-        </div>
         <ul
           role="list"
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-sm sm:mt-20 sm:grid-cols-2 md:gap-y-10 lg:max-w-none lg:grid-cols-3"
+          className="mx-auto grid max-w-2xl grid-cols-1 gap-6 text-sm sm:mt-10 sm:grid-cols-2 md:gap-y-10 lg:max-w-none lg:grid-cols-3"
         >
           {features.map((feature) => (
             <li
               key={feature.name}
-              className="rounded-2xl border border-gray-200 p-8"
+              className="rounded-2xl border border-slate-400/10 p-8"
             >
               <feature.icon className="h-8 w-8" />
-              <h3 className="mt-6 font-semibold text-gray-900 text-lg">
+              <h3 className="mt-6 font-semibold text-gray-900 text-base">
                 {feature.name}
               </h3>
-              <p className="mt-2 text-gray-700 text-base">{feature.description}</p>
+              <p className="mt-2 text-gray-700 text-sm">{feature.description}</p>
             </li>
           ))}
         </ul>

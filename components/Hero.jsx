@@ -4,6 +4,8 @@ import { Highlight, defaultProps } from "prism-react-renderer";
 import { Button } from "@/components/Button";
 import { PlayIcon } from "@heroicons/react/20/solid";
 import { Container } from "@/components/ContainerForFeatures";
+import { Footer } from "@/components/Footer";
+import { Features } from "@/components/Features";
 
 const codeLanguage = "javascript";
 const code = `ფუნქცია ფაქტორიალი(ნ = 6) {
@@ -56,26 +58,28 @@ export function Hero() {
 
   return (
     <Container>
-      <div className="overflow-hidden py-10 sm:px-2 lg:relative lg:px-0 lg:py-12">
-        <div className="py-6 bg-gradient-to-t from-white via-nord6-100 to-slate-50 border-t border-slate-400/10 rounded-3xl">
+      <div className="overflow-hidden py-12 sm:px-2 lg:relative lg:px-0 lg:py-12">
+        <div className="py-6 bg-nord6-100 border-slate-400/10 border rounded-3xl">
           <div className="mx-auto grid grid-cols-1 items-center gap-x-10 gap-y-20 px-6 lg:grid-cols-2 lg:px-10 xl:gap-x-20 xl:px-14">
             <div className="relative z-10 md:text-center lg:text-left">
               <div className="relative">
-                <p className="inline bg-gradient-to-r py-2 from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl tracking-tight text-transparent">
+                <p className="inline bg-gradient-to-r py-2 from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-tight text-transparent">
                   ქართული პროგრამირების ენა
                 </p>
-                <p className="mt-3 text-2xl tracking-tight text-gray-500">
-                  <b>ენა</b> პროგრამირებას ხელმისაწვდომს ხდის ქართულ ენაზე
+                <p className="mt-3 text-xl tracking-tight text-gray-500">
+                თქვენ შეგიძლიათ ისწავლოთ პროგრამირება და გახდეთ წარმატებული პროგრამისტი <b>ენას</b> დახმარებით 
                 </p>
                 <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                  <Button href="/enabot">დაიწყე სწავლა</Button>
+                  <Button href="https://doc.ena-lang.org" target="_blank">
+                    დაიწყე სწავლა
+                  </Button>
                   <Button
-                    href="https://github.com/pgagnidze/ena"
-                    target="_blank"
+                    href="/enabot"
                     variant="secondary"
                   >
-                    მაჩვენე GitHub-ზე
-                  </Button>
+                    AI ენა
+                    </Button>
+
                 </div>
               </div>
             </div>
@@ -249,6 +253,8 @@ export function Hero() {
               </div>
             </div>
           </div>
+          <Features />
+          <Footer />
         </div>
       </div>
     </Container>

@@ -29,9 +29,12 @@ module.exports = {
         nord13: "#EBCB8B",
         "nord14-100": "#A3BE8C",
         "nord14-200": "#92ab7e",
+        "nord14-300": "#85a966",
         nord15: "#B48EAD",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };
