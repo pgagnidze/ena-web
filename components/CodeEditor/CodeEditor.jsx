@@ -92,12 +92,12 @@ const CodeEditorWindow = ({ onChange, language, code, theme, processing, handleC
           <div className="flex items-center h-6">
             <TrafficLightsIcon className="h-2.5 w-auto stroke-gray-300/30" />
           </div>
-          <div className="flex h-6 rounded-md bg-gradient-to-r from-gray-400/30 via-gray-400 to-gray-400/30 p-px font-medium text-gray-300">
+          <div className="hidden md:flex h-6 rounded-md bg-gradient-to-r from-gray-400/30 via-gray-400 to-gray-400/30 p-px font-medium text-gray-300">
             <div className="flex items-center rounded-md px-4 bg-gray-800">
               <span className="text-xs">ქართული პროგრამირების ენა</span>
             </div>
           </div>
-          <div className="flex gap-2 mr-5 h-6">
+          <div className="flex gap-2 h-6">
             <button
               onClick={handleCompile}
               disabled={processing}

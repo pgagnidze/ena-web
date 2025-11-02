@@ -114,7 +114,7 @@ export function Footer() {
     <footer className="">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <p className="text-xs leading-5 text-gray-400">
+          <p className="hidden md:block text-xs leading-5 text-gray-400">
             <b className="text-gray-300">ენას</b> ენდობა და მხარს უჭერს
           </p>
           <div className="flex space-x-3">
