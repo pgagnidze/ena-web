@@ -73,13 +73,6 @@ export function Hero() {
                   <Button href="https://doc.ena-lang.org" target="_blank">
                     დაიწყე სწავლა
                   </Button>
-                  <Button
-                    href="/enabot"
-                    variant="secondary"
-                  >
-                    AI ენა
-                    </Button>
-
                 </div>
               </div>
             </div>

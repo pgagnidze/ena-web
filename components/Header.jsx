@@ -116,7 +116,6 @@ function MobileNavigation(props) {
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
                 <MobileNavItem href="/">მთავარი</MobileNavItem>
-                <MobileNavItem href="/enabot">AI დამხმარე</MobileNavItem>
                 <MobileNavItem href="/code">კოდის გამშვები</MobileNavItem>
                 {/* <MobileNavItem href="/about">დეტალები</MobileNavItem> */}
                 <MobileNavItem
@@ -167,7 +166,6 @@ function DesktopNavigation(props) {
     <nav {...props}>
       <ul className="flex rounded-md bg-white/90 px-3 text-base font-medium text-zinc-500/90 shadow-lg shadow-zinc-700/5 ring-1 ring-zinc-800/5 backdrop-blur">
         <NavItem href="/">მთავარი</NavItem>
-        <NavItem href="/enabot">AI დამხმარე</NavItem>
         <NavItem href="/code">კოდის გამშვები</NavItem>
         <NavItem href="https://doc.ena-lang.org" target="_blank">
           დოკუმენტაცია
