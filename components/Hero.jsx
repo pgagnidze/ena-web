@@ -1,14 +1,14 @@
 import { Fragment, useState } from "react";
 import clsx from "clsx";
-import { Highlight, defaultProps } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 import { Button } from "@/components/Button";
-import { PlayIcon } from "@heroicons/react/20/solid";
+import { PlayIcon, DocumentTextIcon } from "@heroicons/react/20/solid";
 import { Container } from "@/components/ContainerForFeatures";
 import { Footer } from "@/components/Footer";
-import { Features } from "@/components/Features";
 
-const codeLanguage = "javascript";
-const code = `ფუნქცია ფაქტორიალი(ნ = 6) {
+const codeLanguage = "ena";
+const code = `# რეკურსიული ფუნქცია ფაქტორიალის გამოსათვლელად
+ფუნქცია ფაქტორიალი(ნ = 6) {
     თუ ნ != 0 {
         დააბრუნე ნ * ფაქტორიალი(ნ - 1)
     } თუარა {
@@ -16,12 +16,16 @@ const code = `ფუნქცია ფაქტორიალი(ნ = 6) {
     }
 }
 
+# მთავარი ფუნქცია
 ფუნქცია მთავარი() {
-    დააბრუნე ფაქტორიალი()
+    ცვლადი შედეგი = ფაქტორიალი()
+    დაბეჭდე("ფაქტორიალი: ", შედეგი)
+    დააბრუნე შედეგი
 }
 `;
 
-const codeLong = `ფუნქცია სახელად ფაქტორიალი(ციფრი = 6) {
+const codeLong = `# გრძელი ფორმით დაწერილი რეკურსიული ფუნქცია
+ფუნქცია სახელად ფაქტორიალი(ციფრი = 6) {
     თუ პირობა სრულდება ციფრი != 0 {
         დააბრუნე მნიშვნელობა ციფრი * ფაქტორიალი(ციფრი - 1)
     } სხვა შემთხვევაში {
@@ -29,8 +33,11 @@ const codeLong = `ფუნქცია სახელად ფაქტორ
     }
 }
 
+# პროგრამის შესასრულებელი ფუნქცია
 ფუნქცია სახელად მთავარი() {
-    დააბრუნე მნიშვნელობა ფაქტორიალი()
+    ცვლადი შედეგი = ფაქტორიალი()
+    დაბეჭდე("ფაქტორიალი: ", შედეგი)
+    დააბრუნე მნიშვნელობა შედეგი
 }
 `;
 
@@ -43,6 +50,29 @@ function TrafficLightsIcon(props) {
     </svg>
   );
 }
+
+const enaGrammar = {
+  'comment': [
+    {
+      pattern: /#\{[\s\S]*?\#\}/,
+      greedy: true
+    },
+    {
+      pattern: /#.*/,
+      greedy: true
+    }
+  ],
+  'string': {
+    pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+    greedy: true
+  },
+  'keyword': /\b(?:თუ პირობა სრულდება|თუ|სხვა შემთხვევაში შეამოწმე თუ|თუარადა|სხვა შემთხვევაში|თუარა|სანამ პირობა სრულდება გაიმეორე|სანამ|ახალი|ფუნქცია სახელად|ფუნქცია|ლოკალური ცვლადი|ლოკალური|ცვლადი|დააბრუნე მნიშვნელობა|დააბრუნე|მაჩვენე მნიშვნელობა ეკრანზე|მაჩვენე|დაბეჭდე|გაუშვი ბრძანება|ბრძანება|if|elseif|else|while|new|function|local|return)\b/,
+  'boolean': /\b(?:true|false|ჭეშმარიტი მნიშვნელობა|ჭეშმარიტი|მცდარი მნიშვნელობა|მცდარი)\b/,
+  'number': /\b\d+(?:\.\d+)?\b/,
+  'function': /\b[a-zA-Zა-ჰ_][a-zA-Z0-9ა-ჰ_]*(?=\s*\()/,
+  'operator': /[+\-*/%=<>!&|@]/,
+  'punctuation': /[{}[\](),.:;]/
+};
 
 export function Hero() {
   const [activeTab, setActiveTab] = useState(0);
@@ -58,43 +88,39 @@ export function Hero() {
 
   return (
     <Container>
-      <div className="overflow-hidden py-4 sm:px-2 lg:relative lg:px-0 lg:py-4">
-        <div className="py-6 bg-nord6-100 border-slate-400/10 border rounded-3xl">
-          <div className="mx-auto grid grid-cols-1 items-center gap-x-10 gap-y-20 px-6 lg:grid-cols-2 lg:px-10 xl:gap-x-20 xl:px-14">
-            <div className="relative z-10 md:text-center lg:text-left">
+      <div className="overflow-hidden py-8 sm:px-2 lg:relative lg:px-0 lg:py-12">
+        <div className="py-12 min-h-[600px] flex flex-col justify-center">
+          <div className="mx-auto px-6 lg:px-10 xl:px-14 w-full">
+            <div className="relative max-w-5xl mx-auto">
               <div className="relative">
-                <p className="inline bg-gradient-to-r py-2 from-gray-400 via-gray-500 to-gray-400 bg-clip-text font-display text-xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-tight text-transparent">
-                  ქართული პროგრამირების ენა
-                </p>
-                <p className="mt-3 text-xl tracking-tight text-gray-500">
-                თქვენ შეგიძლიათ ისწავლოთ პროგრამირება და გახდეთ წარმატებული პროგრამისტი <b>ენას</b> დახმარებით 
-                </p>
-                <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                  <Button href="https://doc.ena-lang.org" target="_blank">
-                    დაიწყე სწავლა
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="relative lg:static xl:pl-10">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-nord0 via-nord0 to-nord0 opacity-10 blur-lg" />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-nord0 via-nord0 to-nord0 opacity-10" />
-                <div className="relative rounded-2xl bg-nord0 ring-1 ring-white/10 backdrop-blur">
+                <div className="relative rounded-2xl bg-nord0 ring-1 ring-white/10 backdrop-blur shadow-2xl">
                   <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-gray-400/0 via-gray-400/70 to-gray-400/0" />
                   <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-gray-400/0 via-gray-400 to-gray-400/0" />
-                  <div className="pl-4 pt-4 pr-4">
+                  <div className="pl-4 pt-4 pr-4 pb-6">
                     <div className="flex items-center justify-between">
                       <div>
                         <TrafficLightsIcon className="h-2.5 w-auto stroke-gray-300/30" />
                       </div>
-                      <div>
+                      <div className="flex gap-2">
                         <Button
                           href="/code"
                           variant="play"
-                          className="rounded-md p-2 flex items-center justify-center mr-5"
+                          className="rounded-md p-2 flex items-center justify-center"
+                          title="გაუშვი კოდი"
                         >
                           <PlayIcon
+                            className="h-5 w-5 text-nord14-100"
+                            aria-hidden="true"
+                          />
+                        </Button>
+                        <Button
+                          href="https://doc.ena-lang.org"
+                          target="_blank"
+                          variant="play"
+                          className="rounded-md p-2 flex items-center justify-center mr-5"
+                          title="დაიწყე სწავლა"
+                        >
+                          <DocumentTextIcon
                             className="h-5 w-5 text-nord14-100"
                             aria-hidden="true"
                           />
@@ -146,9 +172,9 @@ export function Hero() {
                           ))}
                         </div>
                         <Highlight
-                          {...defaultProps}
                           code={tab.code}
                           language={codeLanguage}
+                          Prism={{ languages: { ena: enaGrammar } }}
                           theme={{
                             plain: {
                               color: "#D8DEE9",
@@ -242,12 +268,14 @@ export function Hero() {
                       </div>
                     ))}
                   </div>
+                  {/* Statusline Footer */}
+                  <div className="border-t border-gray-700/50 px-4 py-3 bg-nord0/50">
+                    <Footer />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <Features />
-          <Footer />
         </div>
       </div>
     </Container>
