@@ -50,36 +50,31 @@ const CodeEditorWindow = ({ onChange, language, code, theme, processing, handleC
   };
 
   const defaultOutputDetails = {
-    status: "success",
-    body: {
-      result: null,
-      output: {},
-    },
+    result: null,
+    output: {},
   };
 
   outputDetails = outputDetails || defaultOutputDetails;
 
   const getOutput = () => {
-    let status = outputDetails.status;
-
-    if (status === "error") {
+    if (outputDetails.error) {
       return (
         <pre className="px-4 py-3 font-mono text-sm text-nord11">
           {outputDetails.error}
         </pre>
       );
-    } else if (status === "success") {
-      let outputValues = Object.values(outputDetails.body.output);
-      const hasOutput = outputValues.length > 0;
-      const hasResult = outputDetails.body.result !== null;
-
-      return (
-        <pre className="px-4 py-3 font-mono text-sm text-nord14-100 whitespace-pre-wrap">
-          {hasOutput && outputValues.join("")}
-          {hasResult && (hasOutput ? "\n" : "") + JSON.stringify(outputDetails.body.result)}
-        </pre>
-      );
     }
+
+    let outputValues = Object.values(outputDetails.output || {});
+    const hasOutput = outputValues.length > 0;
+    const hasResult = outputDetails.result !== null && outputDetails.result !== undefined;
+
+    return (
+      <pre className="px-4 py-3 font-mono text-sm text-nord14-100 whitespace-pre-wrap">
+        {hasOutput && outputValues.join("")}
+        {hasResult && (hasOutput ? "\n" : "") + JSON.stringify(outputDetails.result)}
+      </pre>
+    );
   };
 
   return (
@@ -240,34 +235,13 @@ export const CodeEditor = () => {
         body: JSON.stringify({ code: code }),
       });
 
-      if (compileResponse.status !== 200) {
-        const errorText = await compileResponse.text();
-        setOutputDetails({
-          status: "error",
-          error: `სერვერის შეცდომა: ${errorText}`,
-        });
-        setProcessing(false);
-        return;
-      }
-
       const response = await compileResponse.json();
-
-      if (response.status === "error") {
-        setOutputDetails(response);
-        setProcessing(false);
-        return;
-      }
-
-      if (response.status === "success") {
-        setOutputDetails(response);
-        setProcessing(false);
-        return;
-      }
+      setOutputDetails(response);
     } catch (error) {
       setOutputDetails({
-        status: "error",
         error: `კავშირის შეცდომა: ${error.message}`,
       });
+    } finally {
       setProcessing(false);
     }
   };
